@@ -43,6 +43,7 @@ do
 end
 -- }}}
 
+-- local inspect = require("inspect")
 -- {{{ Local extensions
 local sharedtags = require("awesome-sharedtags")
 -- }}}
@@ -83,12 +84,6 @@ awful.layout.layouts = {
     -- awful.layout.suit.corner.se,
 }
 -- }}}
-function logtable(t)
-	for index, data in ipairs(t) do
-		filelog("index: " .. index .. " name: " .. data.name .. " screen: " .. data.screen.index)
-	end
-end
-
 function filelog(text)
 	file = io.open("awesomelog", "a")
 	io.output(file)
@@ -101,13 +96,13 @@ local tags = sharedtags({
     { name = "1", screen = 1, layout = awful.layout.layouts[0] },
     { name = "2", screen = 2, layout = awful.layout.layouts[0] },
     { name = "3", screen = 3, layout = awful.layout.layouts[0] },
-    -- { name = "4", screen = 1, layout = awful.layout.layouts[0] },
-    -- { name = "5", screen = 2, layout = awful.layout.layouts[0] },
-    -- { name = "6", screen = 2, layout = awful.layout.layouts[0] },
-    -- { name = "7", screen = 2, layout = awful.layout.layouts[0] },
-    -- { name = "8", screen = 3, layout = awful.layout.layouts[0] },
-    -- { name = "9", screen = 3, layout = awful.layout.layouts[0] },
-    -- { name = "0", screen = 3, layout = awful.layout.layouts[0] },
+    { name = "4", screen = 1, layout = awful.layout.layouts[0] },
+    { name = "5", screen = 1, layout = awful.layout.layouts[0] },
+    { name = "6", screen = 1, layout = awful.layout.layouts[0] },
+    { name = "7", screen = 1, layout = awful.layout.layouts[0] },
+    { name = "8", screen = 1, layout = awful.layout.layouts[0] },
+    { name = "9", screen = 1, layout = awful.layout.layouts[0] },
+    { name = "0", screen = 1, layout = awful.layout.layouts[0] },
     -- { layout = awful.layout.layouts[2] },
     -- { screen = 2, layout = awful.layout.layouts[2] }
 })
@@ -218,8 +213,8 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
-        -- filter  = awful.widget.taglist.filter.noempty,
-        filter  = awful.widget.taglist.filter.all,
+        filter  = awful.widget.taglist.filter.noempty,
+        -- filter  = awful.widget.taglist.filter.all,
         buttons = taglist_buttons
     }
 
@@ -416,22 +411,16 @@ for i = 1, 9 do
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
         function ()
-            local screen = awful.screen.focused()
             local tag = tags[i]
-            if tag then -- Focus tag if it already exists on any screen
+            if #tag:clients()==0 and not tag.selected then
+                filelog("Viewing tag " .. i .. " on current screen " .. awful.screen.focused().index)
+                sharedtags.viewonly(tag, awful.screen.focused())
+            else
                 filelog("Viewing tag " .. i .. " on " .. tag.screen.index)
                 sharedtags.viewonly(tag, tag.screen)
-            else -- create new tag on currently focused screen if it does not extst
-                -- FIXME: delete tags that are empty and not visible on any screen
-                filelog("Creating tag " .. i .. " on " .. awful.screen.focused().index)
-                filelog(type(tags))
-                filelog((#tags))
-                newtag = sharedtags.add(i, { name = i, screen = awful.screen.focused().index, layout = awful.layout.layouts[0] })
-                tags[#tags+1]=newtag
-                filelog((#tags))
-                logtable(tags)
-                sharedtags.viewonly(newtag, newtag.screen)
+                awful.screen.focus(tag.screen)
             end
+
         end,
         {description = "view tag #"..i, group = "tag"}),
         -- Toggle tag display.
