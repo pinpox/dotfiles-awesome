@@ -422,6 +422,7 @@ for i = 1, 9 do
                 filelog("Viewing tag " .. i .. " on " .. tag.screen.index)
                 sharedtags.viewonly(tag, tag.screen)
             else -- create new tag on currently focused screen if it does not extst
+                -- FIXME: delete tags that are empty and not visible on any screen
                 filelog("Creating tag " .. i .. " on " .. awful.screen.focused().index)
                 filelog(type(tags))
                 filelog((#tags))
