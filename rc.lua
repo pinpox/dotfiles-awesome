@@ -93,16 +93,16 @@ end
 
 -- {{{ Tags
 local tags = sharedtags({
-    { name = "1", screen = 1, layout = awful.layout.layouts[0] },
-    { name = "2", screen = 2, layout = awful.layout.layouts[0] },
-    { name = "3", screen = 3, layout = awful.layout.layouts[0] },
-    { name = "4", screen = 1, layout = awful.layout.layouts[0] },
-    { name = "5", screen = 1, layout = awful.layout.layouts[0] },
-    { name = "6", screen = 1, layout = awful.layout.layouts[0] },
-    { name = "7", screen = 1, layout = awful.layout.layouts[0] },
-    { name = "8", screen = 1, layout = awful.layout.layouts[0] },
-    { name = "9", screen = 1, layout = awful.layout.layouts[0] },
-    { name = "0", screen = 1, layout = awful.layout.layouts[0] },
+    { name = "1", screen = 1, layout = awful.layout.layouts[1] },
+    { name = "2", screen = 2, layout = awful.layout.layouts[1] },
+    { name = "3", screen = 3, layout = awful.layout.layouts[1] },
+    { name = "4", screen = 1, layout = awful.layout.layouts[1] },
+    { name = "5", screen = 1, layout = awful.layout.layouts[1] },
+    { name = "6", screen = 1, layout = awful.layout.layouts[1] },
+    { name = "7", screen = 1, layout = awful.layout.layouts[1] },
+    { name = "8", screen = 1, layout = awful.layout.layouts[1] },
+    { name = "9", screen = 1, layout = awful.layout.layouts[1] },
+    { name = "0", screen = 1, layout = awful.layout.layouts[1] },
     -- { layout = awful.layout.layouts[2] },
     -- { screen = 2, layout = awful.layout.layouts[2] }
 })
@@ -407,10 +407,8 @@ for i = 1, 9 do
         function ()
             local tag = tags[i]
             if #tag:clients()==0 and not tag.selected then
-                filelog("Viewing tag " .. i .. " on current screen " .. awful.screen.focused().index)
                 sharedtags.viewonly(tag, awful.screen.focused())
             else
-                filelog("Viewing tag " .. i .. " on " .. tag.screen.index)
                 sharedtags.viewonly(tag, tag.screen)
                 awful.screen.focus(tag.screen)
             end
