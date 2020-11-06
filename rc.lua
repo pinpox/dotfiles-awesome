@@ -19,11 +19,11 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 
 -- Widgets from https://github.com/streetturtle/awesome-wm-widgets/
-local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
-local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
-local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
-local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
-local storage_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
+-- local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+-- local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
+-- local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
+-- local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+-- local storage_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -142,14 +142,14 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 mytextclock = wibox.widget.textclock("%H:%M")
 
 
-local cw = calendar_widget({
-    theme = 'nord',
-    placement = 'top_right',
-})
-mytextclock:connect_signal("button::press",
-    function(_, _, _, button)
-        if button == 1 then cw.toggle() end
-    end)
+-- local cw = calendar_widget({
+--     theme = 'nord',
+--     placement = 'top_right',
+-- })
+-- mytextclock:connect_signal("button::press",
+--     function(_, _, _, button)
+--         if button == 1 then cw.toggle() end
+--     end)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -255,19 +255,19 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
-            cpu_widget({
-                width = 70,
-                step_width = 2,
-                step_spacing = 0,
-                color = '#434c5e'
-            }),
-            volumearc_widget({
-                main_color = '#af13f7',
-                mute_color = '#ff0000',
-                thickness = 5,
-                height = 25,
-            }),
-                  storage_widget(), --default
+            -- cpu_widget({
+            --     width = 70,
+            --     step_width = 2,
+            --     step_spacing = 0,
+            --     color = '#434c5e'
+            -- }),
+            -- volumearc_widget({
+            --     main_color = '#af13f7',
+            --     mute_color = '#ff0000',
+            --     thickness = 5,
+            --     height = 25,
+            -- }),
+          -- storage_widget(), --default
 
 
             -- batteryarc_widget({
