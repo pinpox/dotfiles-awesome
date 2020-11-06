@@ -76,22 +76,22 @@ local function darker(color_value, darker_n)
     return result
 end
 theme = theme_assets.recolor_titlebar(
-    theme, theme.fg_normal, "normal"
+theme, theme.fg_normal, "normal"
 )
 theme = theme_assets.recolor_titlebar(
-    theme, darker(theme.fg_normal, -60), "normal", "hover"
+theme, darker(theme.fg_normal, -60), "normal", "hover"
 )
 theme = theme_assets.recolor_titlebar(
-    theme, xrdb.color1, "normal", "press"
+theme, xrdb.color1, "normal", "press"
 )
 theme = theme_assets.recolor_titlebar(
-    theme, theme.fg_focus, "focus"
+theme, theme.fg_focus, "focus"
 )
 theme = theme_assets.recolor_titlebar(
-    theme, darker(theme.fg_focus, -60), "focus", "hover"
+theme, darker(theme.fg_focus, -60), "focus", "hover"
 )
 theme = theme_assets.recolor_titlebar(
-    theme, xrdb.color1, "focus", "press"
+theme, xrdb.color1, "focus", "press"
 )
 
 -- Define the icon theme for application icons. If not set then the icons
@@ -100,16 +100,16 @@ theme.icon_theme = nil
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
-    theme.menu_height, theme.bg_focus, theme.fg_focus
+theme.menu_height, theme.bg_focus, theme.fg_focus
 )
 
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_normal
+taglist_square_size, theme.fg_normal
 )
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.fg_normal
+taglist_square_size, theme.fg_normal
 )
 
 -- Try to determine if we are running light or dark colorscheme:
