@@ -15,7 +15,7 @@ local theme = dofile(themes_path.."default/theme.lua")
 -- load vector assets' generators for this theme
 
 -- theme.font          = "Sauce Code Pro"
-theme.font          = "SauceCodePro Nerd Font"
+theme.font          = "SauceCodePro Nerd Font Semibold"
 
 theme.bg_normal     = xrdb.background
 theme.bg_focus      = xrdb.color12
