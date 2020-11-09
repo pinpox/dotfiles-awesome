@@ -10,7 +10,7 @@ require("awful.autofocus")
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
-local menubar = require("menubar")
+menubar = require("menubar")
 
 -- Widgets from https://github.com/streetturtle/awesome-wm-widgets/
 -- local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
@@ -44,12 +44,12 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
--- Table of layouts to cover with awful.layout.inc, order matters.
+-- Table of layouts to cover with awful.layout.inc, order matters. Only
 awful.layout.layouts = {
     awful.layout.suit.max,
-    awful.layout.suit.floating,
+    -- awful.layout.suit.floating,
     awful.layout.suit.tile,
-    awful.layout.suit.magnifier,
+    -- awful.layout.suit.magnifier,
     -- awful.layout.suit.fair,
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.max.fullscreen,
@@ -73,16 +73,19 @@ end
 
 -- {{{ Tags
 tags = sharedtags({
-    { name = "1", screen = 1, layout = awful.layout.layouts[1] },
-    { name = "2", screen = 2, layout = awful.layout.layouts[1] },
-    { name = "3", screen = 3, layout = awful.layout.layouts[1] },
-    { name = "4", screen = 1, layout = awful.layout.layouts[1] },
-    { name = "5", screen = 1, layout = awful.layout.layouts[1] },
-    { name = "6", screen = 1, layout = awful.layout.layouts[1] },
-    { name = "7", screen = 1, layout = awful.layout.layouts[1] },
-    { name = "8", screen = 1, layout = awful.layout.layouts[1] },
-    { name = "9", screen = 1, layout = awful.layout.layouts[1] },
-    { name = "0", screen = 1, layout = awful.layout.layouts[1] },
+    -- Create all tags, only non-empty and focused will be shown
+    -- Set tiling ratio for the master window to approx. the golden ratio
+    -- Default layout is tiling
+    { name = "1", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
+    { name = "2", screen = 2, layout = awful.layout.layouts[2], master_width_factor = 0.62},
+    { name = "3", screen = 3, layout = awful.layout.layouts[2], master_width_factor = 0.62},
+    { name = "4", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
+    { name = "5", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
+    { name = "6", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
+    { name = "7", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
+    { name = "8", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
+    { name = "9", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
+    { name = "0", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
     -- { layout = awful.layout.layouts[2] },
     -- { screen = 2, layout = awful.layout.layouts[2] }
 })
@@ -107,7 +110,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%H:%M")
+mytextclock = wibox.widget.textclock("%H:%M ")
 
 
 -- local cw = calendar_widget({
@@ -192,6 +195,7 @@ awful.screen.connect_for_each_screen(function(s)
     awful.button({ }, 3, function () awful.layout.inc(-1) end),
     awful.button({ }, 4, function () awful.layout.inc( 1) end),
     awful.button({ }, 5, function () awful.layout.inc(-1) end)))
+
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
         screen  = s,
@@ -200,11 +204,40 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = taglist_buttons
     }
 
+
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
+        buttons = tasklist_buttons,
+        layout = {
+            spacing = 5,
+            layout  = wibox.layout.flex.horizontal
+        },
+        widget_template = {
+            {
+                {
+                    {
+                        {
+                            id     = 'icon_role',
+                            widget = wibox.widget.imagebox,
+                        },
+                        margins = 5,
+                        widget  = wibox.container.margin,
+                    },
+                    {
+                        id     = 'text_role',
+                        widget = wibox.widget.textbox,
+                    },
+                    layout = wibox.layout.fixed.horizontal,
+                },
+                left  = 10,
+                right = 10,
+                widget = wibox.container.margin
+            },
+            id     = 'background_role',
+            widget = wibox.container.background,
+        },
     }
 
     -- Create the wibox
@@ -222,7 +255,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist, -- Middle widget
     { -- Right widgets
     layout = wibox.layout.fixed.horizontal,
-    mykeyboardlayout,
+    -- mykeyboardlayout,
     -- cpu_widget({
     --     width = 70,
     --     step_width = 2,
@@ -286,7 +319,14 @@ client.connect_signal("request::titlebars", function(c)
 
     awful.titlebar(c) : setup {
         { -- Left
-        awful.titlebar.widget.iconwidget(c),
+        -- add margin around titlebar icons
+        {
+            awful.titlebar.widget.iconwidget(c),
+            layout = wibox.container.margin,
+            top = 5,
+            left = 5,
+            bottom = 5
+        },
         buttons = buttons,
         layout  = wibox.layout.fixed.horizontal
     },
