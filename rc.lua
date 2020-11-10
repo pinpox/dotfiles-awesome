@@ -111,16 +111,16 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock("%H:%M ")
+month_calendar = awful.widget.calendar_popup.month({
+    bg = "#00fff0",
+})
 
+month_calendar:attach( mytextclock, "br" )
 
--- local cw = calendar_widget({
---     theme = 'nord',
---     placement = 'top_right',
--- })
--- mytextclock:connect_signal("button::press",
---     function(_, _, _, button)
---         if button == 1 then cw.toggle() end
---     end)
+mytextclock:connect_signal("button::press",
+    function(_, _, _, button)
+        if button == 1 then month_calendar:toggle() end
+    end)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
