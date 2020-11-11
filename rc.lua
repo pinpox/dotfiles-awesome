@@ -3,29 +3,20 @@
 pcall(require, "luarocks.loader")
 
 -- Standard awesome library
-local gears = require("gears")
-local awful = require("awful")
+gears = require("gears")
+awful = require("awful")
 require("awful.autofocus")
+
 -- Widget and layout library
-local wibox = require("wibox")
+wibox = require("wibox")
+
 -- Theme handling library
-local beautiful = require("beautiful")
-menubar = require("menubar")
-
--- Widgets from https://github.com/streetturtle/awesome-wm-widgets/
--- local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
--- local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
--- local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
--- local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
--- local storage_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
+beautiful = require("beautiful")
 
 
--- local inspect = require("inspect")
--- {{{ Local extensions
+-- Local extensions
 sharedtags = require("awesome-sharedtags")
--- }}}
 
--- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("~/.config/awesome/theme.lua")
 
@@ -47,21 +38,21 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters. Only
 awful.layout.layouts = {
     awful.layout.suit.max,
-    -- awful.layout.suit.floating,
     awful.layout.suit.tile,
-    -- awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.ne,
+    -- awful.layout.suit.corner.nw,
+    -- awful.layout.suit.corner.se,
+    -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.fair,
     -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.floating,
+    -- awful.layout.suit.magnifier,
     -- awful.layout.suit.max.fullscreen,
-    -- awful.layout.suit.tile.left,
-    -- awful.layout.suit.tile.bottom,
-    -- awful.layout.suit.tile.top,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.corner.se,
+    -- awful.layout.suit.tile.bottom,
+    -- awful.layout.suit.tile.left,
+    -- awful.layout.suit.tile.top,
 }
 -- }}}
 function filelog(text)
@@ -75,7 +66,7 @@ end
 tags = sharedtags({
     -- Create all tags, only non-empty and focused will be shown
     -- Set tiling ratio for the master window to approx. the golden ratio
-    -- Default layout is tiling
+    -- Default layout is tiling (2)
     { name = "1", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
     { name = "2", screen = 2, layout = awful.layout.layouts[2], master_width_factor = 0.62},
     { name = "3", screen = 3, layout = awful.layout.layouts[2], master_width_factor = 0.62},
@@ -91,37 +82,15 @@ tags = sharedtags({
 })
 -- }}}
 
--- {{{ Menu
--- Create the main menu
 dofile("/home/pinpox/.config/awesome/mainmenu.lua")
 dofile("/home/pinpox/.config/awesome/keybinds.lua")
 dofile("/home/pinpox/.config/awesome/rules.lua")
 dofile("/home/pinpox/.config/awesome/errors.lua")
+dofile("/home/pinpox/.config/awesome/bar.lua")
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-menu = mymainmenu })
 
--- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
-
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
--- Create a textclock widget
-mytextclock = wibox.widget.textclock("%H:%M ")
-month_calendar = awful.widget.calendar_popup.month({
-    bg = "#00fff0",
-})
-
-month_calendar:attach( mytextclock, "br" )
-
-mytextclock:connect_signal("button::press",
-    function(_, _, _, button)
-        if button == 1 then month_calendar:toggle() end
-    end)
-
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
 awful.button({ }, 1, function(t) t:view_only() end),
@@ -174,119 +143,17 @@ local function set_wallpaper(s)
     end
 end
 
--- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", set_wallpaper)
-
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
+end   )
 
-    -- Assign tags to the newly connected screen here,
-    -- if desired:
-    --sharedtags.viewonly(tags[4], s)
-
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
-    -- Create an imagebox widget which will contain an icon indicating which layout we're using.
-    -- We need one layoutbox per screen.
-    s.mylayoutbox = awful.widget.layoutbox(s)
-    s.mylayoutbox:buttons(gears.table.join(
-    awful.button({ }, 1, function () awful.layout.inc( 1) end),
-    awful.button({ }, 3, function () awful.layout.inc(-1) end),
-    awful.button({ }, 4, function () awful.layout.inc( 1) end),
-    awful.button({ }, 5, function () awful.layout.inc(-1) end)))
-
-    -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist {
-        screen  = s,
-        filter  = awful.widget.taglist.filter.noempty,
-        -- filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
-    }
-
-
-    -- Create a tasklist widget
-    s.mytasklist = awful.widget.tasklist {
-        screen  = s,
-        filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons,
-        layout = {
-            spacing = 5,
-            layout  = wibox.layout.flex.horizontal
-        },
-        widget_template = {
-            {
-                {
-                    {
-                        {
-                            id     = 'icon_role',
-                            widget = wibox.widget.imagebox,
-                        },
-                        margins = 5,
-                        widget  = wibox.container.margin,
-                    },
-                    {
-                        id     = 'text_role',
-                        widget = wibox.widget.textbox,
-                    },
-                    layout = wibox.layout.fixed.horizontal,
-                },
-                left  = 10,
-                right = 10,
-                widget = wibox.container.margin
-            },
-            id     = 'background_role',
-            widget = wibox.container.background,
-        },
-    }
-
-    -- Create the wibox
-    s.mywibox = awful.wibar({ position = "bottom", screen = s })
-
-    -- Add widgets to the wibox
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-        layout = wibox.layout.fixed.horizontal,
-        mylauncher,
-        s.mytaglist,
-        s.mypromptbox,
-    },
-    s.mytasklist, -- Middle widget
-    { -- Right widgets
-    layout = wibox.layout.fixed.horizontal,
-    -- mykeyboardlayout,
-    -- cpu_widget({
-    --     width = 70,
-    --     step_width = 2,
-    --     step_spacing = 0,
-    --     color = '#434c5e'
-    -- }),
-    -- volumearc_widget({
-    --     main_color = '#af13f7',
-    --     mute_color = '#ff0000',
-    --     thickness = 5,
-    --     height = 25,
-    -- }),
-    -- storage_widget(), --default
-
-
-    -- batteryarc_widget({
-    -- show_current_level = true,
-    -- }),
-    wibox.widget.systray(),
-    mytextclock,
-    s.mylayoutbox,
-},
-    }
-end)
--- }}}
+-- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
+screen.connect_signal("property::geometry", set_wallpaper)
 
 -- Set keys
 root.keys(globalkeys)
 -- }}}
-
-
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.

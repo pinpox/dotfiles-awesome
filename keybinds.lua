@@ -1,5 +1,10 @@
 local awful = require("awful")
 local gears = require("gears")
+local menubar = require("menubar")
+
+-- Menubar configuration
+menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+-- }}}
 
 hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
