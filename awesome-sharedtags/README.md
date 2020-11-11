@@ -1,5 +1,9 @@
-awesome-sharedtags
-==================
+# awesome-sharedtags
+
+I decided to fork this, because I have changed a few things and the original has
+not been updated in years. This is my take on shared tags across screens.
+
+# Original README
 
 A simple implementation for creating tags shared on multiple screens for
 [awesome window manager](http://awesome.naquadah.org/).
