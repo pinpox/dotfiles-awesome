@@ -13,10 +13,6 @@ wibox = require("wibox")
 -- Theme handling library
 beautiful = require("beautiful")
 
-
--- Local extensions
-sharedtags = require("awesome-sharedtags")
-
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("~/.config/awesome/theme.lua")
 
@@ -35,26 +31,12 @@ editor_cmd = terminal .. " -e " .. editor
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
--- Table of layouts to cover with awful.layout.inc, order matters. Only
+-- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.max,
     awful.layout.suit.tile,
-    -- awful.layout.suit.corner.ne,
-    -- awful.layout.suit.corner.nw,
-    -- awful.layout.suit.corner.se,
-    -- awful.layout.suit.corner.sw,
-    -- awful.layout.suit.fair,
-    -- awful.layout.suit.fair.horizontal,
-    -- awful.layout.suit.floating,
-    -- awful.layout.suit.magnifier,
-    -- awful.layout.suit.max.fullscreen,
-    -- awful.layout.suit.spiral,
-    -- awful.layout.suit.spiral.dwindle,
-    -- awful.layout.suit.tile.bottom,
-    -- awful.layout.suit.tile.left,
-    -- awful.layout.suit.tile.top,
 }
--- }}}
+
 function filelog(text)
     file = io.open("awesomelog", "a")
     io.output(file)
@@ -63,73 +45,13 @@ function filelog(text)
 end
 
 -- {{{ Tags
-tags = sharedtags({
-    -- Create all tags, only non-empty and focused will be shown
-    -- Set tiling ratio for the master window to approx. the golden ratio
-    -- Default layout is tiling (2)
-    { name = "1", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
-    { name = "2", screen = 2, layout = awful.layout.layouts[2], master_width_factor = 0.62},
-    { name = "3", screen = 3, layout = awful.layout.layouts[2], master_width_factor = 0.62},
-    { name = "4", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
-    { name = "5", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
-    { name = "6", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
-    { name = "7", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
-    { name = "8", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
-    { name = "9", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
-    { name = "0", screen = 1, layout = awful.layout.layouts[2], master_width_factor = 0.62},
-    -- { layout = awful.layout.layouts[2] },
-    -- { screen = 2, layout = awful.layout.layouts[2] }
-})
--- }}}
+tags = require("tags")
 
 dofile("/home/pinpox/.config/awesome/mainmenu.lua")
 dofile("/home/pinpox/.config/awesome/keybinds.lua")
 dofile("/home/pinpox/.config/awesome/rules.lua")
 dofile("/home/pinpox/.config/awesome/errors.lua")
 dofile("/home/pinpox/.config/awesome/bar.lua")
-
-
-
--- {{{ Wibar
--- Create a wibox for each screen and add it
-local taglist_buttons = gears.table.join(
-awful.button({ }, 1, function(t) t:view_only() end),
-awful.button({ modkey }, 1, function(t)
-    if client.focus then
-        client.focus:move_to_tag(t)
-    end
-end),
-awful.button({ }, 3, awful.tag.viewtoggle),
-awful.button({ modkey }, 3, function(t)
-    if client.focus then
-        client.focus:toggle_tag(t)
-    end
-end),
-awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
-awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
-)
-
-local tasklist_buttons = gears.table.join(
-awful.button({ }, 1, function (c)
-    if c == client.focus then
-        c.minimized = true
-    else
-        c:emit_signal(
-        "request::activate",
-        "tasklist",
-        {raise = true}
-        )
-    end
-end),
-awful.button({ }, 3, function()
-    awful.menu.client_list({ theme = { width = 250 } })
-end),
-awful.button({ }, 4, function ()
-    awful.client.focus.byidx(1)
-end),
-awful.button({ }, 5, function ()
-    awful.client.focus.byidx(-1)
-end))
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -153,7 +75,6 @@ screen.connect_signal("property::geometry", set_wallpaper)
 
 -- Set keys
 root.keys(globalkeys)
--- }}}
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
@@ -224,6 +145,5 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
---
+
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
