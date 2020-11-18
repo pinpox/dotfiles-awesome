@@ -143,7 +143,7 @@ theme.wallpaper = function(s)
     local cr = cairo.Context(img)
 
     colors = require "wallpaper-generator.colors"
-    generator = require("wallpaper-generator.generators.lines")
+    generator = require("wallpaper-generator.generators.harmonograph")
     generator(cr, palette, width, height)
     return img
 end
