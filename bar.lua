@@ -13,6 +13,8 @@ awful.button({ modkey }, 3, function(t)
 		client.focus:toggle_tag(t)
 	end
 end),
+
+-- Scroll on taglist
 awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
 awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
 )
@@ -38,12 +40,7 @@ end),
 awful.button({ }, 5, function ()
 	awful.client.focus.byidx(-1)
 end))
--- {{{ Menu
--- Create the main menu
-mylauncher = awful.widget.launcher({
-	image = beautiful.awesome_icon,
-	menu = mymainmenu
-})
+
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock("%H:%M ")
 month_calendar = awful.widget.calendar_popup.month({
@@ -58,15 +55,10 @@ function(_, _, _, button)
 end)
 
 awful.screen.connect_for_each_screen(function(s)
-	-- Wallpaper
-	-- set_wallpaper(s)
-
 	-- Assign tags to the newly connected screen here,
 	-- if desired:
 	--sharedtags.viewonly(tags[4], s)
 
-	-- Create a promptbox for each screen
-	s.mypromptbox = awful.widget.prompt()
 	-- Create an imagebox widget which will contain an icon indicating which layout we're using.
 	-- We need one layoutbox per screen.
 	s.mylayoutbox = awful.widget.layoutbox(s)
@@ -102,7 +94,7 @@ awful.screen.connect_for_each_screen(function(s)
 							id     = 'icon_role',
 							widget = wibox.widget.imagebox,
 						},
-						margins = 5,
+						margins = 3,
 						widget  = wibox.container.margin,
 					},
 					{
@@ -120,27 +112,65 @@ awful.screen.connect_for_each_screen(function(s)
 		},
 	}
 
+
+	function custom_shape(cr, width, height)
+		cr:move_to(10,0)
+		cr:line_to(width -10,0)
+		cr:line_to(width -10, height- 10)
+		cr:line_to(10,height-10)
+		cr:close_path()
+	end
+
 	-- Create the wibox
-	s.mywibox = awful.wibar({ position = "bottom", screen = s })
+	s.mywibox = awful.wibox({
+		position = "bottom",
+		screen = s,
+		height = 40,
+		shape = custom_shape,
+		-- width = 900,
+	})
+
 
 	-- Add widgets to the wibox
 	s.mywibox:setup {
-		layout = wibox.layout.align.horizontal,
 		{
-			-- Left widgets
-			layout = wibox.layout.fixed.horizontal,
-			mylauncher,
-			s.mytaglist,
-			s.mypromptbox,
+			-- opacity = 0,
+			layout = wibox.layout.align.horizontal,
+			{
+				{
+					-- Left widgets
+					layout = wibox.layout.fixed.horizontal,
+					s.mytaglist,
+				},
+				margins = 5,
+				widget = wibox.container.margin,
+
+			},
+			-- Middle widget
+			{
+				s.mytasklist,
+
+				margins = 5,
+				widget = wibox.container.margin,
+			},
+			{
+				{
+					-- Right widgets
+					layout = wibox.layout.fixed.horizontal,
+					spacing = 30,
+					wibox.widget.systray(),
+					mytextclock,
+					s.mylayoutbox,
+				},
+
+				margins = 5,
+				widget  = wibox.container.margin,
+			},
+
 		},
-		-- Middle widget
-		s.mytasklist,
-		{
-			-- Right widgets
-			layout = wibox.layout.fixed.horizontal,
-			wibox.widget.systray(),
-			mytextclock,
-			s.mylayoutbox,
-		},
+		bottom = 10,
+		left = 10,
+		right = 10,
+		widget = wibox.container.margin,
 	}
 end)
