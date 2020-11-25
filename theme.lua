@@ -39,7 +39,7 @@ theme.bg_normal     = palette.base00
 theme.bg_focus      = palette.base0D
 theme.bg_urgent     = palette.base09
 theme.bg_minimize   = palette.base09
-theme.bg_systray    = palette.base03
+theme.bg_systray    = palette.base00
 
 theme.fg_normal     = palette.base05
 theme.fg_focus      = palette.base00
