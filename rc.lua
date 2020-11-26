@@ -2,7 +2,6 @@
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
 
-math.randomseed(os.time())
 -- Standard awesome library
 gears = require("gears")
 awful = require("awful")
