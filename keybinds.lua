@@ -4,12 +4,6 @@ local menubar = require("menubar")
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
-menubar.show_categories = false
-menubar.geometry = {
-	x = 10,
-	y = 10,
-}
-
 -- }}}
 
 hotkeys_popup = require("awful.hotkeys_popup")
