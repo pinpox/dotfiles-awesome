@@ -16,11 +16,11 @@ awful.rules.rules = {
 }
     },
 
+{ rule = { class = "Firefox" },
+  properties = { opacity = 1, maximized = false, floating = false } },
     -- Floating clients.
     { rule_any = {
         instance = {
-            "DTA",  -- Firefox addon DownThemAll.
-            "copyq",  -- Includes session name in class.
             "pinentry",
         },
         class = {
