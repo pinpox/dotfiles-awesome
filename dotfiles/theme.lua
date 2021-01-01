@@ -142,6 +142,7 @@ theme.wallpaper = function(s)
     cairo.Rectangle { x = 0, y = 0, width = width, height = height })
     local cr = cairo.Context(img)
 
+    package.path = package.path .. ";/home/pinpox/.local/share/wallpaper-generator"
     colors = require "wallpaper-generator.colors"
     generator = require("wallpaper-generator.generators.harmonograph")
     generator(cr, palette, width, height)

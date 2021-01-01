@@ -12,7 +12,7 @@
       dotfiles = { config, ... }: {
         home.file = { 
           ".config/awesome".source = ./dotfiles; 
-          ".config/awesome/wallpaper-generator".source = wallpaper-generator;
+          ".local/share/wallpaper-generator".source = wallpaper-generator;
         };
       };
     };
