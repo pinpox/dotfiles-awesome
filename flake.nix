@@ -5,7 +5,9 @@
   outputs = { self, nixpkgs }: {
 
     nixosModules = {
-      dotfiles = { home.file = { ".config/awesome".source = ./dotfiles; }; };
+      dotfiles = { config, ... }: {
+        home.file = { ".config/awesome".source = ./dotfiles; };
+      };
     };
   };
 }
