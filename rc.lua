@@ -66,6 +66,10 @@ awful.rules.rules = {
             buttons = clientbuttons,
             screen = awful.screen.preferred,
             placement = awful.placement.no_overlap+awful.placement.no_offscreen
+            maximized_vertical   = false,
+            maximized_horizontal = false,
+            floating = false,
+            maximized = false
         }
     },
     {
@@ -105,12 +109,12 @@ awful.rules.rules = {
     --     },
     --     properties = { floating = true }
     -- },
--- Add titlebars to normal clients and dialogs
-{
-    rule_any = {
-        type = { "normal", "dialog" }
-    }, properties = { titlebars_enabled = true }
-},
+    -- Add titlebars to normal clients and dialogs
+    {
+        rule_any = {
+            type = { "normal", "dialog" }
+        }, properties = { titlebars_enabled = true }
+    },
 }
 dofile("/home/pinpox/.config/awesome/errors.lua")
 dofile("/home/pinpox/.config/awesome/bar.lua")
