@@ -80,6 +80,33 @@ awful.rules.rules = {
             floating = false
         }
     },
+
+    {
+        rule = { class = "Navigator" },
+        properties = {
+            opacity = 1,
+            maximized = false,
+            floating = false
+        }
+    },
+
+    {
+        rule = { class = "firefox" },
+        properties = {
+            opacity = 1,
+            maximized = false,
+            floating = false
+        }
+    },
+
+    {
+        rule = { class = "navigator" },
+        properties = {
+            opacity = 1,
+            maximized = false,
+            floating = false
+        }
+    },
     -- {
     -- -- Floating clients.
     --     rule_any = {
