@@ -54,54 +54,62 @@ dofile("/home/pinpox/.config/awesome/keybinds.lua")
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
 awful.rules.rules = {
-	-- All clients will match this rule.
-	{ rule = { },
-	properties = { border_width = beautiful.border_width,
-	border_color = beautiful.border_normal,
-	focus = awful.client.focus.filter,
-	raise = true,
-	keys = clientkeys,
-	buttons = clientbuttons,
-	screen = awful.screen.preferred,
-	placement = awful.placement.no_overlap+awful.placement.no_offscreen
-}
-	},
-
-	{ rule = { class = "Firefox" },
-	properties = { opacity = 1, maximized = false, floating = false } },
-
-	-- Floating clients.
-	{ rule_any = {
-		instance = {
-			"pinentry",
-		},
-		class = {
-			"Arandr",
-			"Blueman-manager",
-			"Gpick",
-			"Kruler",
-			"MessageWin",  -- kalarm.
-			"Sxiv",
-			"Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
-			"Wpa_gui",
-			"veromix",
-			"xtightvncviewer"},
-
-			-- Note that the name property shown in xprop might be set slightly after creation of the client
-			-- and the name shown there might not match defined rules here.
-			name = {
-				"Event Tester",  -- xev.
-			},
-			role = {
-				"AlarmWindow",  -- Thunderbird's calendar.
-				"ConfigManager",  -- Thunderbird's about:config.
-				"pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
-			}
-		}, properties = { floating = true }},
-
-		-- Add titlebars to normal clients and dialogs
-		{ rule_any = {type = { "normal", "dialog" }
-	}, properties = { titlebars_enabled = true }
+    -- All clients will match this rule.
+    {
+        rule = { },
+        properties = {
+            border_width = beautiful.border_width,
+            border_color = beautiful.border_normal,
+            focus = awful.client.focus.filter,
+            raise = true,
+            keys = clientkeys,
+            buttons = clientbuttons,
+            screen = awful.screen.preferred,
+            placement = awful.placement.no_overlap+awful.placement.no_offscreen
+        }
+    },
+    {
+        rule = { class = "Firefox" },
+        properties = {
+            opacity = 1,
+            maximized = false,
+            floating = false
+        }
+    },
+    -- {
+    -- -- Floating clients.
+    --     rule_any = {
+    --         instance = { "pinentry", },
+    --         class = {
+    --             "Arandr",
+    --             "Blueman-manager",
+    --             "Gpick",
+    --             "Kruler",
+    --             "MessageWin",  -- kalarm.
+    --             "Sxiv",
+    --             "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+    --             "Wpa_gui",
+    --             "veromix",
+    --             "xtightvncviewer"
+    --         },
+    --         -- Note that the name property shown in xprop might be set slightly after creation of the client
+    --         -- and the name shown there might not match defined rules here.
+    --         name = {
+    --             "Event Tester",  -- xev.
+    --         },
+    --         role = {
+    --             "AlarmWindow",  -- Thunderbird's calendar.
+    --             "ConfigManager",  -- Thunderbird's about:config.
+    --             "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+    --         }
+    --     },
+    --     properties = { floating = true }
+    -- },
+-- Add titlebars to normal clients and dialogs
+{
+    rule_any = {
+        type = { "normal", "dialog" }
+    }, properties = { titlebars_enabled = true }
 },
 }
 dofile("/home/pinpox/.config/awesome/errors.lua")
@@ -161,24 +169,24 @@ client.connect_signal("request::titlebars", function(c)
 
     awful.titlebar(c) : setup {
         { -- Left
-            -- add margin around titlebar icons
-            {
-                awful.titlebar.widget.iconwidget(c),
-                layout = wibox.container.margin,
-                top = 5,
-                left = 5,
-                bottom = 5
-            },
-            buttons = buttons,
-            layout  = wibox.layout.fixed.horizontal
+        -- add margin around titlebar icons
+        {
+            awful.titlebar.widget.iconwidget(c),
+            layout = wibox.container.margin,
+            top = 5,
+            left = 5,
+            bottom = 5
         },
-        { -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
-            },
-            buttons = buttons,
-            layout  = wibox.layout.flex.horizontal
+        buttons = buttons,
+        layout  = wibox.layout.fixed.horizontal
+    },
+    { -- Middle
+    { -- Title
+    align  = "center",
+    widget = awful.titlebar.widget.titlewidget(c)
+},
+buttons = buttons,
+layout  = wibox.layout.flex.horizontal
         },
         { -- Right
         {
@@ -188,15 +196,15 @@ client.connect_signal("request::titlebars", function(c)
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
-                layout = wibox.container.margin,
-                top = 3,
-                left = 3,
-                right = 3,
-                bottom = 3
+        layout = wibox.container.margin,
+        top = 3,
+        left = 3,
+        right = 3,
+        bottom = 3
 
-        },
-        layout = wibox.layout.align.horizontal
-    }
+    },
+    layout = wibox.layout.align.horizontal
+}
 end)
 
 -- Enable sloppy focus, so that focus follows mouse.
