@@ -18,7 +18,24 @@
     },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "wallpaper-generator": "wallpaper-generator"
+      }
+    },
+    "wallpaper-generator": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1609537219,
+        "narHash": "sha256-AZRZKvx5nBfxOWvxE70WAfvf1qBq7i0M0TsMZAVNf3A=",
+        "owner": "pinpox",
+        "repo": "wallpaper-generator",
+        "rev": "0fd5b09e60d7047947da87f0f5860b311ae7bea1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pinpox",
+        "repo": "wallpaper-generator",
+        "type": "github"
       }
     }
   },
