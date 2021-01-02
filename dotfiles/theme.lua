@@ -142,8 +142,9 @@ theme.wallpaper = function(s)
     cairo.Rectangle { x = 0, y = 0, width = width, height = height })
     local cr = cairo.Context(img)
 
-    colors = dofile("/home/pinpox/.local/share/wallpaper-generator/colors.lua"
-    generator = dofile("/home/pinpox/.local/share/wallpaper-generator/generators/harmonograph.lua")
+    package.path = package.path .. ";/home/pinpox/.local/share/wallpaper-generator/?.lua"
+    colors = require "colors"
+    generator = require("generators.harmonograph")
     generator(cr, palette, width, height)
     return img
 end
