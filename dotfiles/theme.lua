@@ -14,7 +14,7 @@ local themes_path = gfs.get_themes_dir()
 local theme = dofile(themes_path.."default/theme.lua")
 -- load vector assets' generators for this theme
 
-theme.font = "Iosevka Medium 9"
+theme.font = "Overpass SemiBold 9"
 
 palette = {}
 
