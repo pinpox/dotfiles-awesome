@@ -14,7 +14,7 @@ local themes_path = gfs.get_themes_dir()
 local theme = dofile(themes_path.."default/theme.lua")
 -- load vector assets' generators for this theme
 
-theme.font = "Overpass SemiBold 9"
+theme.font = "Sauce Code Pro Nerd Font Semibold 9"
 
 palette = {}
 
