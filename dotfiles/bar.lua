@@ -114,11 +114,12 @@ awful.screen.connect_for_each_screen(function(s)
 
 
 	function custom_shape(cr, width, height)
-		cr:move_to(10,10)
+		-- cr:move_to(10,10)
 		-- cr:line_to(width -10,0)
 		-- cr:line_to(width -10, height- 10)
 		-- cr:line_to(10,height-10)
-		gears.shape.rounded_rect(cr, width -10 , height -10, 5) : translate(10,10)
+		gears.shape.transform(gears.shape.rounded_rect(cr, width -10 , height -10, 5))
+			: translate(10,10)
 		-- cr:close_path()
 	end
 
