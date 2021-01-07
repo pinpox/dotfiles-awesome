@@ -122,7 +122,7 @@ local function custom_shape(cr, width, height)
         gears.shape.rounded_rect(cr, width -10 , height -10, 5)
     end
     gears.shape.transform(inner_shape)
-        : translate(10, 10)
+        : translate(10, -10)
         (cr, width, height)
 end
 
