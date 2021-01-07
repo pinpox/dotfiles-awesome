@@ -114,7 +114,7 @@ awful.screen.connect_for_each_screen(function(s)
 
 
 	function custom_shape(cr, width, height)
-		gears.shape.transform(gears.shape.rounded_rect) : translate(10, -10) (cr, width -10 , height -10, 5)
+		gears.shape.transform(gears.shape.rounded_rect) : translate(10, -10) (cr, width -20, height, 5)
 	end
 
 	-- Create the wibox
