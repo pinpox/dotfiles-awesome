@@ -186,7 +186,7 @@ end
 theme.button_red_normal = squircle(24, xrdb.color8)
 theme.button_red_focus = squircle(24, xrdb.color8)
 theme.button_red_hover = squircle(24, darker(xrdb.color8, -60))
-theme.button_red_press = squircle(24, darker(xrdb.color8, -60))
+theme.button_red_press = squircle(24, darker(xrdb.color8, 60))
 
 theme.button_yellow_focus = squircle(24, xrdb.color10)
 theme.button_yellow_normal = squircle(24, xrdb.color10)
