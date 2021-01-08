@@ -167,8 +167,11 @@ function squircle(size, fg, radius)
     cr:set_source(gears.color.transparent)
     cr:paint()
 
+  local width, height = size, size
+
 
     cr:new_sub_path()
+    -- cr:arc(radius, radius, radius, 0 * degrees, 360 * degrees)
     cr:circle(size/2, size/2 radius, radius)
     cr:close_path()
 
@@ -178,7 +181,6 @@ function squircle(size, fg, radius)
 
     return img
 end
-
 
 
 
