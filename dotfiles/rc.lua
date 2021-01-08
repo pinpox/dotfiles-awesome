@@ -15,8 +15,8 @@ wibox = require("wibox")
 beautiful = require("beautiful")
 
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/theme.lua")
--- beautiful.init("~/Projects/dotfiles-awesome/dotfiles/theme.lua")
+-- beautiful.init("~/.config/awesome/theme.lua")
+beautiful.init("~/Projects/dotfiles-awesome/dotfiles/theme.lua")
 
 -- Add a gap around clients
 beautiful.useless_gap  = 5

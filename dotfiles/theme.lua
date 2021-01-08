@@ -151,99 +151,84 @@ theme.wallpaper = function(s)
     return img
 end
 
-function squircle(size, fg)
+-- Generates a button image given a base color using cairo. The output image
+-- will be a filled circle with darker shade outline of the same color
+function button_image(fg)
+    local size = dpi(24)
+
+    -- Create new image and fill it with transparency
     local img = cairo.ImageSurface.create(cairo.Format.ARGB32, size, size)
     local cr = cairo.Context(img)
-
     cr:set_source(gears.color.transparent)
     cr:paint()
 
-    local width, height = size, size
-
+    -- Draw circle and fill it. cr:circle() is throwing errors, so just use the
+    -- arc() function with a complete rotation instead
     cr:new_sub_path()
     cr:arc(size/2, size/2, size/3, 0, 2 * math.pi)
     cr:close_path()
-
     cr:set_source(gears.color(fg))
+
+    -- Use the _preserve variant of the fill() function, this prevents the
+    -- path from being discarted after filling so we can use it to draw the
+    -- outer line below
     cr:fill_preserve()
+
+    -- Draw outer line, in a darker shade
+    cr:set_source(gears.color(darker(fg, 60)))
+    cr:set_line_width(dpi(1));
     cr:stroke()
 
     return img
 end
 
-theme.button_red_normal    = squircle(24, xrdb.color8)
-theme.button_red_focus     = squircle(24, xrdb.color8)
-theme.button_red_hover     = squircle(24, darker(xrdb.color8, -60))
-theme.button_red_press     = squircle(24, darker(xrdb.color8, 60))
+-- Generates normal, dark and light shade of buttons for a given base color.
+function button_variants(fg)
+    return button_image(fg), button_image(darker(fg, 30)), button_image(darker(fg, -30))
+end
 
-theme.button_yellow_focus  = squircle(24, xrdb.color10)
-theme.button_yellow_normal = squircle(24, xrdb.color10)
-theme.button_yellow_hover  = squircle(24, darker(xrdb.color10, -60))
-theme.button_yellow_press  = squircle(24, darker(xrdb.color10, 60))
+-- Cache the buttons in variables, so we don't have to generate them multiple
+-- times as drawing them is expensive
+local button_images = {}
+button_images.red, button_images.red_dark, button_images.red_light = button_variants(xrdb.color8)
+button_images.yellow, button_images.yellow_dark, button_images.yellow_light = button_variants(xrdb.color10)
+button_images.green, button_images.green_dark, button_images.green_light = button_variants(xrdb.color11)
+button_images.blue, button_images.blue_dark, button_images.blue_light = button_variants(xrdb.color13)
+button_images.grey, button_images.grey_dark, button_images.grey_light = button_variants(xrdb.color3)
 
-theme.button_green_focus   = squircle(24, xrdb.color11)
-theme.button_green_normal  = squircle(24, xrdb.color11)
-theme.button_green_hover   = squircle(24, darker(xrdb.color11, -60))
-theme.button_green_press   = squircle(24, darker(xrdb.color11, 60))
+-- Association between colors and button types
+local button_types = {
+    ["close"] = "red",
+    ["sticky"] = "yellow",
+    ["floating"] = "green"
+}
 
-theme.button_blue_focus    = squircle(24, xrdb.color11)
-theme.button_blue_normal   = squircle(24, xrdb.color11)
-theme.button_blue_hover    = squircle(24, darker(xrdb.color11, -60))
-theme.button_blue_press    = squircle(24, darker(xrdb.color11, 60))
+-- Association between button states and color shades
+-- This could be further reduced with another loop over "", "_active" and
+-- "_inactive" but in the future, there might be diffent behaviours for these
+-- classes, so I'll list them sepraterly to be able to assign individual values
+-- if needed later.
+local button_actions = {
+    [""] = "",
+    ["_hover"] = "_light",
+    ["_press"] = "_dark",
+    ["_active"] = "_dark",
+    ["_active_hover"] = "_light",
+    ["_active_press"] = "_dark",
+    ["_inactive"] = "",
+    ["_inactive_hover"] = "_light",
+    ["_inactive_press"] = "_dark"
+}
 
--- Close button
-theme.titlebar_close_button_normal                   = theme.button_red_normal
-theme.titlebar_close_button_focus                    = theme.button_red_focus
-theme.titlebar_close_button_focus_hover              = theme.button_red_hover
-theme.titlebar_close_button_focus_press              = theme.button_red_press
-
--- Floating button
-theme.titlebar_floating_button_focus                 = theme.button_green_focus
-theme.titlebar_floating_button_focus_active          = theme.button_green_focus
-theme.titlebar_floating_button_focus_active_hover    = theme.button_green_hover
-theme.titlebar_floating_button_focus_active_press    = theme.button_green_press
-theme.titlebar_floating_button_focus_inactive        = theme.button_green_focus
-theme.titlebar_floating_button_focus_inactive_hover  = theme.button_green_hover
-theme.titlebar_floating_button_focus_inactive_press  = theme.button_green_press
-
-theme.titlebar_floating_button_normal                = theme.button_green_normal
-theme.titlebar_floating_button_normal_active         = theme.button_green_normal
-theme.titlebar_floating_button_normal_active_hover   = theme.button_green_hover
-theme.titlebar_floating_button_normal_active_press   = theme.button_green_normal
-theme.titlebar_floating_button_normal_inactive       = theme.button_green_normal
-theme.titlebar_floating_button_normal_inactive_hover = theme.button_green_hover
-theme.titlebar_floating_button_normal_inactive_press = theme.button_green_press
-
--- Sticky button
-theme.titlebar_sticky_button_focus                   = theme.button_yellow_focus
-theme.titlebar_sticky_button_focus_active            = theme.button_yellow_focus
-theme.titlebar_sticky_button_focus_active_hover      = theme.button_yellow_hover
-theme.titlebar_sticky_button_focus_active_press      = theme.button_yellow_press
-theme.titlebar_sticky_button_focus_inactive          = theme.button_yellow_focus
-theme.titlebar_sticky_button_focus_inactive_hover    = theme.button_yellow_hover
-theme.titlebar_sticky_button_focus_inactive_press    = theme.button_yellow_press
-theme.titlebar_sticky_button_normal                  = theme.button_yellow_normal
-theme.titlebar_sticky_button_normal_active           = theme.button_yellow_normal
-theme.titlebar_sticky_button_normal_active_hover     = theme.button_yellow_hover
-theme.titlebar_sticky_button_normal_active_press     = theme.button_yellow_press
-theme.titlebar_sticky_button_normal_inactive         = theme.button_yellow_normal
-theme.titlebar_sticky_button_normal_inactive_hover   = theme.button_yellow_hover
-theme.titlebar_sticky_button_normal_inactive_press   = theme.button_yellow_press
-
--- theme.titlebar_maximized_button_focus = theme.button_red_focus
--- theme.titlebar_maximized_button_focus_active = theme.button_red_focus
--- theme.titlebar_maximized_button_focus_active_hover = theme.button_red_hover
--- theme.titlebar_maximized_button_focus_active_press = theme.button_red_focus
--- theme.titlebar_maximized_button_focus_inactive = theme.button_red_focus
--- theme.titlebar_maximized_button_focus_inactive_hover = theme.button_red_hover
--- theme.titlebar_maximized_button_focus_inactive_press = theme.button_red_press
-
--- theme.titlebar_maximized_button_normal = theme.button_red_focus
--- theme.titlebar_maximized_button_normal_active = theme.button_red_focus
--- theme.titlebar_maximized_button_normal_active_hover = theme.button_red_hover
--- theme.titlebar_maximized_button_normal_active_press = theme.button_red_press
--- theme.titlebar_maximized_button_normal_inactive = theme.button_red_focus
--- theme.titlebar_maximized_button_normal_inactive_hover = theme.button_red_hover
--- theme.titlebar_maximized_button_normal_inactive_press = theme.button_red_press
+-- Set the icons. Some unused icons are set, e.g. a not-focused window can't be
+-- hovered since it would become focused, but the code is a lot cleaner this way
+-- and the additional images will have very little performance impact.
+for button_type, button_color in pairs(button_types) do
+    for i, window_state in ipairs({"normal", "focus"}) do
+        for button_action, color_shade in pairs(button_actions) do
+            theme["titlebar_" .. button_type .. "_button_" .. window_state .. button_action] = button_images[button_color .. color_shade]
+        end
+    end
+end
 
 return theme
