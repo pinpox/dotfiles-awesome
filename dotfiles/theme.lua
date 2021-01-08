@@ -1,3 +1,4 @@
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
 ---------------------------------------------
 -- Awesome theme which follows xrdb config --
 --   by Yauhen Kirylau                    --
@@ -84,6 +85,7 @@ theme.titlebar_bg_focus = palette.base0D
 theme.tooltip_fg = theme.fg_normal
 theme.tooltip_bg = theme.bg_normal
 
+
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
@@ -157,6 +159,126 @@ end
 --   end
 --   return max
 -- end
+
+function squircle(size, fg, radius)
+    local img = cairo.ImageSurface.create(cairo.Format.ARGB32, size, size)
+    local cr = cairo.Context(img)
+
+    cr:set_source(gears.color.transparent)
+    cr:paint()
+
+    local width, height = size, size
+
+    local degrees = math.pi / 180.0
+
+    cr:new_sub_path()
+    cr:arc(radius, radius, radius, 0 * degrees, 360 * degrees)
+    cr:close_path()
+
+    cr:set_source(gears.color(fg))
+    cr:fill_preserve()
+    cr:stroke()
+
+    return img
+end
+
+
+
+
+theme.button_red_focus = squircle(32, xrdb.color8, 12)
+theme.button_red_normal = squircle(32, xrdb.color8, 12)
+theme.button_red_hover = squircle(32, xrdb.color8, 12)
+
+theme.button_yellow_focus = squircle(32, xrdb.color10, 12)
+theme.button_yellow_normal = squircle(32, xrdb.color10, 12)
+theme.button_yellow_hover = squircle(32, xrdb.color10, 12)
+
+theme.button_green_focus = squircle(32, xrdb.color11, 12)
+theme.button_green_normal = squircle(32, xrdb.color11, 12)
+theme.button_green_hover = squircle(32, xrdb.color11, 12)
+
+theme.button_blue_focus = squircle(32, xrdb.color11, 12)
+theme.button_blue_normal = squircle(32, xrdb.color11, 12)
+theme.button_blue_hover = squircle(32, xrdb.color11, 12)
+
+theme.titlebar_close_button_focus = theme.button_red_focus --close_button_focus.
+theme.titlebar_close_button_focus_hover = theme.button_red_focus --close_button_focus_hover.
+theme.titlebar_close_button_focus_press = theme.button_red_focus --close_button_focus_press.
+theme.titlebar_close_button_normal = theme.button_red_focus --close_button_normal.
+theme.titlebar_close_button_normal_hover = theme.button_red_focus --close_button_normal_hover.
+theme.titlebar_close_button_normal_press = theme.button_red_focus --close_button_normal_press.
+
+theme.titlebar_floating_button_focus = theme.button_green_focus --floating_button_focus.
+theme.titlebar_floating_button_focus_active = theme.button_green_focus --floating_button_focus_active.
+theme.titlebar_floating_button_focus_active_hover = theme.button_green_focus --floating_button_focus_active_hover.
+theme.titlebar_floating_button_focus_active_press = theme.button_green_focus --floating_button_focus_active_press.
+theme.titlebar_floating_button_focus_inactive = theme.button_green_focus --floating_button_focus_inactive.
+theme.titlebar_floating_button_focus_inactive_hover = theme.button_green_focus --floating_button_focus_inactive_hover.
+theme.titlebar_floating_button_focus_inactive_press = theme.button_green_focus --floating_button_focus_inactive_press.
+
+theme.titlebar_floating_button_normal = theme.button_green_focus --floating_button_normal.
+theme.titlebar_floating_button_normal_active = theme.button_green_focus --floating_button_normal_active.
+theme.titlebar_floating_button_normal_active_hover = theme.button_green_focus --floating_button_normal_active_hover.
+theme.titlebar_floating_button_normal_active_press = theme.button_green_focus --floating_button_normal_active_press.
+theme.titlebar_floating_button_normal_inactive = theme.button_green_focus --floating_button_normal_inactive.
+theme.titlebar_floating_button_normal_inactive_hover = theme.button_green_focus --floating_button_normal_inactive_hover.
+theme.titlebar_floating_button_normal_inactive_press = theme.button_green_focus --floating_button_normal_inactive_press.
+
+theme.titlebar_maximized_button_focus = theme.button_red_focus --maximized_button_focus.
+theme.titlebar_maximized_button_focus_active = theme.button_red_focus --maximized_button_focus_active.
+theme.titlebar_maximized_button_focus_active_hover = theme.button_red_focus --maximized_button_focus_active_hover.
+theme.titlebar_maximized_button_focus_active_press = theme.button_red_focus --maximized_button_focus_active_press.
+theme.titlebar_maximized_button_focus_inactive = theme.button_red_focus --maximized_button_focus_inactive.
+theme.titlebar_maximized_button_focus_inactive_hover = theme.button_red_focus --maximized_button_focus_inactive_hover.
+theme.titlebar_maximized_button_focus_inactive_press = theme.button_red_focus --maximized_button_focus_inactive_press.
+
+theme.titlebar_maximized_button_normal = theme.button_red_focus --maximized_button_normal.
+theme.titlebar_maximized_button_normal_active = theme.button_red_focus --maximized_button_normal_active.
+theme.titlebar_maximized_button_normal_active_hover = theme.button_red_focus --maximized_button_normal_active_hover.
+theme.titlebar_maximized_button_normal_active_press = theme.button_red_focus --maximized_button_normal_active_press.
+theme.titlebar_maximized_button_normal_inactive = theme.button_red_focus --maximized_button_normal_inactive.
+theme.titlebar_maximized_button_normal_inactive_hover = theme.button_red_focus --maximized_button_normal_inactive_hover.
+theme.titlebar_maximized_button_normal_inactive_press = theme.button_red_focus --maximized_button_normal_inactive_press.
+
+theme.titlebar_sticky_button_focus = theme.button_yellow_focus --sticky_button_focus.
+theme.titlebar_sticky_button_focus_active = theme.button_yellow_focus --sticky_button_focus_active.
+theme.titlebar_sticky_button_focus_active_hover = theme.button_yellow_focus --sticky_button_focus_active_hover.
+theme.titlebar_sticky_button_focus_active_press = theme.button_yellow_focus --sticky_button_focus_active_press.
+theme.titlebar_sticky_button_focus_inactive = theme.button_yellow_focus --sticky_button_focus_inactive.
+theme.titlebar_sticky_button_focus_inactive_hover = theme.button_yellow_focus --sticky_button_focus_inactive_hover.
+theme.titlebar_sticky_button_focus_inactive_press = theme.button_yellow_focus --sticky_button_focus_inactive_press.
+theme.titlebar_sticky_button_normal = theme.button_yellow_focus --sticky_button_normal.
+theme.titlebar_sticky_button_normal_active = theme.button_yellow_focus --sticky_button_normal_active.
+theme.titlebar_sticky_button_normal_active_hover = theme.button_yellow_focus --sticky_button_normal_active_hover.
+theme.titlebar_sticky_button_normal_active_press = theme.button_yellow_focus --sticky_button_normal_active_press.
+theme.titlebar_sticky_button_normal_inactive = theme.button_yellow_focus --sticky_button_normal_inactive.
+theme.titlebar_sticky_button_normal_inactive_hover = theme.button_yellow_focus --sticky_button_normal_inactive_hover.
+theme.titlebar_sticky_button_normal_inactive_press = theme.button_yellow_focus --sticky_button_normal_inactive_press.
+
+
+-- theme.button_normal = squircle(32, xrdb.color7, 12)
+-- theme.button_focus = squircle(32, xrdb.color15, 12)
+-- theme.button_active = squircle(32, xrdb.color12, 12)
+-- theme.button_normal_active = squircle(32, xrdb.color4, 12)
+
+-- theme.titlebar_floating_button_focus_active = theme.button_active
+-- theme.titlebar_floating_button_focus_inactive  = theme.button_focus
+-- theme.titlebar_floating_button_normal_active = theme.button_normal_active
+-- theme.titlebar_floating_button_normal_inactive  = theme.button_normal
+
+-- theme.titlebar_sticky_button_focus_active = theme.button_active
+-- theme.titlebar_sticky_button_focus_inactive  = theme.button_focus
+-- theme.titlebar_sticky_button_normal_active = theme.button_normal_active
+-- theme.titlebar_sticky_button_normal_inactive  = theme.button_normal
+
+-- theme.titlebar_ontop_button_focus_active = theme.button_active
+-- theme.titlebar_ontop_button_focus_inactive  = theme.button_focus
+-- theme.titlebar_ontop_button_normal_active = theme.button_normal_active
+-- theme.titlebar_ontop_button_normal_inactive  = theme.button_normal
+
+-- theme.titlebar_close_button_normal = squircle(32, xrdb.color3, 12)
+-- theme.titlebar_close_button_focus = squircle(32, xrdb.color8, 12)
+
 
 return theme
 

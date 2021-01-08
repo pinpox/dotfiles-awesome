@@ -16,6 +16,7 @@ beautiful = require("beautiful")
 
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("~/.config/awesome/theme.lua")
+-- beautiful.init("~/Projects/dotfiles-awesome/dotfiles/theme.lua")
 
 -- Add a gap around clients
 beautiful.useless_gap  = 5
@@ -200,6 +201,9 @@ client.connect_signal("request::titlebars", function(c)
         awful.mouse.client.resize(c)
     end)
     )
+    local titlebar = awful.titlebar(c, {
+        height = 24
+    })
 
     awful.titlebar(c) : setup {
         { -- Left
@@ -226,7 +230,7 @@ layout  = wibox.layout.flex.horizontal
         {
             awful.titlebar.widget.floatingbutton (c),
             awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
+            -- awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
