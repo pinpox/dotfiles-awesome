@@ -49,8 +49,8 @@ end
 -- {{{ Tags
 tags = require("tags")
 
-dofile("/home/pinpox/.config/awesome/mainmenu.lua")
-dofile("/home/pinpox/.config/awesome/keybinds.lua")
+require("mainmenu")
+require("keybinds")
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
@@ -142,8 +142,8 @@ awful.rules.rules = {
         }, properties = { titlebars_enabled = true }
     },
 }
-dofile("/home/pinpox/.config/awesome/errors.lua")
-dofile("/home/pinpox/.config/awesome/bar.lua")
+require("errors")
+require("bar")
 
 local function set_wallpaper(s)
     -- Wallpaper
