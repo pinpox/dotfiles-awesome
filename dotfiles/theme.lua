@@ -160,7 +160,7 @@ end
 --   return max
 -- end
 
-function squircle(size, fg, radius)
+function squircle(size, fg)
     local img = cairo.ImageSurface.create(cairo.Format.ARGB32, size, size)
     local cr = cairo.Context(img)
 
@@ -172,7 +172,7 @@ function squircle(size, fg, radius)
     local degrees = math.pi / 180.0
 
     cr:new_sub_path()
-    cr:arc(size/2,size/2, radius, 0 * degrees, 360 * degrees)
+    cr:arc(size/2,size/2, size/3, 0 * degrees, 360 * degrees)
     cr:close_path()
 
     cr:set_source(gears.color(fg))
@@ -185,21 +185,21 @@ end
 
 
 
-theme.button_red_focus = squircle(24, xrdb.color8, 8)
-theme.button_red_normal = squircle(24, xrdb.color8, 8)
-theme.button_red_hover = squircle(24, xrdb.color8, 8)
+theme.button_red_focus = squircle(24, xrdb.color8)
+theme.button_red_normal = squircle(24, xrdb.color8)
+theme.button_red_hover = squircle(24, darker(xrdb.color8, -60))
 
-theme.button_yellow_focus = squircle(24, xrdb.color10, 8)
-theme.button_yellow_normal = squircle(24, xrdb.color10, 8)
-theme.button_yellow_hover = squircle(24, xrdb.color10, 8)
+theme.button_yellow_focus = squircle(24, xrdb.color10)
+theme.button_yellow_normal = squircle(24, xrdb.color10)
+theme.button_yellow_hover = squircle(24, xrdb.color10)
 
-theme.button_green_focus = squircle(24, xrdb.color11, 8)
-theme.button_green_normal = squircle(24, xrdb.color11, 8)
-theme.button_green_hover = squircle(24, xrdb.color11, 8)
+theme.button_green_focus = squircle(24, xrdb.color11)
+theme.button_green_normal = squircle(24, xrdb.color11)
+theme.button_green_hover = squircle(24, xrdb.color11)
 
-theme.button_blue_focus = squircle(24, xrdb.color11, 8)
-theme.button_blue_normal = squircle(24, xrdb.color11, 8)
-theme.button_blue_hover = squircle(24, xrdb.color11, 8)
+theme.button_blue_focus = squircle(24, xrdb.color11)
+theme.button_blue_normal = squircle(24, xrdb.color11)
+theme.button_blue_hover = squircle(24, xrdb.color11)
 
 theme.titlebar_close_button_focus = theme.button_red_focus --close_button_focus.
 theme.titlebar_close_button_focus_hover = theme.button_red_focus --close_button_focus_hover.
