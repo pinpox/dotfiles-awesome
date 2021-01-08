@@ -172,7 +172,7 @@ function squircle(size, fg, radius)
     local degrees = math.pi / 180.0
 
     cr:new_sub_path()
-    cr:arc(radius, radius, radius, 0 * degrees, 360 * degrees)
+    cr:arc(size/2,size/2, radius, 0 * degrees, 360 * degrees)
     cr:close_path()
 
     cr:set_source(gears.color(fg))
