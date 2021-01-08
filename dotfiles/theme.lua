@@ -183,30 +183,31 @@ function squircle(size, fg)
 end
 
 
-
-
-theme.button_red_focus = squircle(24, xrdb.color8)
 theme.button_red_normal = squircle(24, xrdb.color8)
+theme.button_red_focus = squircle(24, xrdb.color8)
 theme.button_red_hover = squircle(24, darker(xrdb.color8, -60))
+theme.button_red_press = squircle(24, darker(xrdb.color8, -60))
 
 theme.button_yellow_focus = squircle(24, xrdb.color10)
 theme.button_yellow_normal = squircle(24, xrdb.color10)
 theme.button_yellow_hover = squircle(24, xrdb.color10)
+theme.button_yellow_press = squircle(24, xrdb.color10)
 
 theme.button_green_focus = squircle(24, xrdb.color11)
 theme.button_green_normal = squircle(24, xrdb.color11)
 theme.button_green_hover = squircle(24, xrdb.color11)
+theme.button_green_press = squircle(24, xrdb.color11)
 
 theme.button_blue_focus = squircle(24, xrdb.color11)
 theme.button_blue_normal = squircle(24, xrdb.color11)
 theme.button_blue_hover = squircle(24, xrdb.color11)
+theme.button_blue_press = squircle(24, xrdb.color11)
 
+-- Close button
+theme.titlebar_close_button_normal = theme.button_red_normal --close_button_normal.
 theme.titlebar_close_button_focus = theme.button_red_focus --close_button_focus.
-theme.titlebar_close_button_focus_hover = theme.button_red_focus --close_button_focus_hover.
-theme.titlebar_close_button_focus_press = theme.button_red_focus --close_button_focus_press.
-theme.titlebar_close_button_normal = theme.button_red_focus --close_button_normal.
-theme.titlebar_close_button_normal_hover = theme.button_red_focus --close_button_normal_hover.
-theme.titlebar_close_button_normal_press = theme.button_red_focus --close_button_normal_press.
+theme.titlebar_close_button_focus_hover = theme.button_red_hover --close_button_focus_hover.
+theme.titlebar_close_button_focus_press = theme.button_red_press --close_button_focus_press.
 
 theme.titlebar_floating_button_focus = theme.button_green_focus --floating_button_focus.
 theme.titlebar_floating_button_focus_active = theme.button_green_focus --floating_button_focus_active.
