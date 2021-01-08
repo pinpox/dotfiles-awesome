@@ -185,21 +185,21 @@ end
 
 
 
-theme.button_red_focus = squircle(32, xrdb.color8, 12)
-theme.button_red_normal = squircle(32, xrdb.color8, 12)
-theme.button_red_hover = squircle(32, xrdb.color8, 12)
+theme.button_red_focus = squircle(24, xrdb.color8, 8)
+theme.button_red_normal = squircle(24, xrdb.color8, 8)
+theme.button_red_hover = squircle(24, xrdb.color8, 8)
 
-theme.button_yellow_focus = squircle(32, xrdb.color10, 12)
-theme.button_yellow_normal = squircle(32, xrdb.color10, 12)
-theme.button_yellow_hover = squircle(32, xrdb.color10, 12)
+theme.button_yellow_focus = squircle(24, xrdb.color10, 8)
+theme.button_yellow_normal = squircle(24, xrdb.color10, 8)
+theme.button_yellow_hover = squircle(24, xrdb.color10, 8)
 
-theme.button_green_focus = squircle(32, xrdb.color11, 12)
-theme.button_green_normal = squircle(32, xrdb.color11, 12)
-theme.button_green_hover = squircle(32, xrdb.color11, 12)
+theme.button_green_focus = squircle(24, xrdb.color11, 8)
+theme.button_green_normal = squircle(24, xrdb.color11, 8)
+theme.button_green_hover = squircle(24, xrdb.color11, 8)
 
-theme.button_blue_focus = squircle(32, xrdb.color11, 12)
-theme.button_blue_normal = squircle(32, xrdb.color11, 12)
-theme.button_blue_hover = squircle(32, xrdb.color11, 12)
+theme.button_blue_focus = squircle(24, xrdb.color11, 8)
+theme.button_blue_normal = squircle(24, xrdb.color11, 8)
+theme.button_blue_hover = squircle(24, xrdb.color11, 8)
 
 theme.titlebar_close_button_focus = theme.button_red_focus --close_button_focus.
 theme.titlebar_close_button_focus_hover = theme.button_red_focus --close_button_focus_hover.
