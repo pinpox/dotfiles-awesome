@@ -3,7 +3,6 @@
 -- Awesome theme which follows xrdb config --
 --   by Yauhen Kirylau                    --
 ---------------------------------------------
-
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
@@ -12,7 +11,7 @@ local gfs = require("gears.filesystem")
 local themes_path = gfs.get_themes_dir()
 
 -- inherit default theme
-local theme = dofile(themes_path.."default/theme.lua")
+local theme = dofile(themes_path .. "default/theme.lua")
 -- load vector assets' generators for this theme
 
 theme.font = "Sauce Code Pro Nerd Font Semibold 9"
@@ -36,21 +35,21 @@ palette.base0D = xrdb.color13
 palette.base0E = xrdb.color14
 palette.base0F = xrdb.color15
 
-theme.bg_normal     = palette.base00
-theme.bg_focus      = palette.base0D
-theme.bg_urgent     = palette.base09
-theme.bg_minimize   = palette.base09
-theme.bg_systray    = palette.base00
+theme.bg_normal = palette.base00
+theme.bg_focus = palette.base0D
+theme.bg_urgent = palette.base09
+theme.bg_minimize = palette.base09
+theme.bg_systray = palette.base00
 
-theme.fg_normal     = palette.base05
-theme.fg_focus      = palette.base00
-theme.fg_urgent     = palette.base00
-theme.fg_minimize   = palette.base00
+theme.fg_normal = palette.base05
+theme.fg_focus = palette.base00
+theme.fg_urgent = palette.base00
+theme.fg_minimize = palette.base00
 
-theme.useless_gap   = dpi(3)
-theme.border_width  = dpi(2)
+theme.useless_gap = dpi(3)
+theme.border_width = dpi(2)
 theme.border_normal = palette.base03
-theme.border_focus  = palette.base0D
+theme.border_focus = palette.base0D
 theme.border_marked = palette.base0A
 
 -- Taglist (workspace indicator)
@@ -85,18 +84,17 @@ theme.titlebar_bg_focus = palette.base0D
 theme.tooltip_fg = theme.fg_normal
 theme.tooltip_bg = theme.bg_normal
 
-
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_submenu_icon = themes_path.."default/submenu.png"
+theme.menu_submenu_icon = themes_path .. "default/submenu.png"
 theme.menu_height = dpi(16)
-theme.menu_width  = dpi(100)
+theme.menu_width = dpi(100)
 
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
---theme.bg_widget = "#cc0000"
+-- theme.bg_widget = "#cc0000"
 
 -- Recolor Layout icons:
 theme = theme_assets.recolor_layout(theme, theme.fg_normal)
@@ -106,7 +104,7 @@ theme = theme_assets.recolor_layout(theme, theme.fg_normal)
 local function darker(color_value, darker_n)
     local result = "#"
     for s in color_value:gmatch("[a-fA-F0-9][a-fA-F0-9]") do
-        local bg_numeric_value = tonumber("0x"..s) - darker_n
+        local bg_numeric_value = tonumber("0x" .. s) - darker_n
         if bg_numeric_value < 0 then bg_numeric_value = 0 end
         if bg_numeric_value > 255 then bg_numeric_value = 255 end
         result = result .. string.format("%2.2x", bg_numeric_value)
@@ -114,23 +112,27 @@ local function darker(color_value, darker_n)
     return result
 end
 
-theme = theme_assets.recolor_titlebar( theme, palette.base05, "normal")
-theme = theme_assets.recolor_titlebar( theme, palette.base03, "normal", "hover")
-theme = theme_assets.recolor_titlebar( theme, palette.base01, "normal", "press")
-theme = theme_assets.recolor_titlebar( theme, palette.base00, "focus")
-theme = theme_assets.recolor_titlebar( theme, darker(theme.fg_focus, -60), "focus", "hover")
-theme = theme_assets.recolor_titlebar( theme, palette.base01, "focus", "press")
+theme = theme_assets.recolor_titlebar(theme, palette.base05, "normal")
+theme = theme_assets.recolor_titlebar(theme, palette.base03, "normal", "hover")
+theme = theme_assets.recolor_titlebar(theme, palette.base01, "normal", "press")
+theme = theme_assets.recolor_titlebar(theme, palette.base00, "focus")
+theme = theme_assets.recolor_titlebar(theme, darker(theme.fg_focus, -60),
+                                      "focus", "hover")
+theme = theme_assets.recolor_titlebar(theme, palette.base01, "focus", "press")
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = nil
 
 -- Generate Awesome icon:
-theme.awesome_icon = theme_assets.awesome_icon( theme.menu_height, palette.base0E, palette.base00)
+theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height,
+                                               palette.base0E, palette.base00)
 
 -- Generate taglist squares:
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel( dpi(5), palette.base05)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel( dpi(5), palette.base05)
+theme.taglist_squares_sel = theme_assets.taglist_squares_sel(dpi(5),
+                                                             palette.base05)
+theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(dpi(5),
+                                                                 palette.base05)
 
 -- Generate wallpaper:
 local cairo = require("lgi").cairo
@@ -140,11 +142,16 @@ theme.wallpaper = function(s)
     s = s or screen.primary
     local height = s.geometry.height
     local width = s.geometry.width
-    local img = cairo.RecordingSurface(cairo.Content.COLOR,
-    cairo.Rectangle { x = 0, y = 0, width = width, height = height })
+    local img = cairo.RecordingSurface(cairo.Content.COLOR, cairo.Rectangle {
+        x = 0,
+        y = 0,
+        width = width,
+        height = height
+    })
     local cr = cairo.Context(img)
 
-    package.path = package.path .. ";/home/pinpox/.local/share/wallpaper-generator/?.lua"
+    package.path = package.path ..
+                       ";/home/pinpox/.local/share/wallpaper-generator/?.lua"
     colors = require "colors"
     generator = require("generators.harmonograph")
     generator(cr, palette, width, height)
@@ -165,7 +172,7 @@ function button_image(fg)
     -- Draw circle and fill it. cr:circle() is throwing errors, so just use the
     -- arc() function with a complete rotation instead
     cr:new_sub_path()
-    cr:arc(size/2, size/2, size/3, 0, 2 * math.pi)
+    cr:arc(size / 2, size / 2, size / 3, 0, 2 * math.pi)
     cr:close_path()
     cr:set_source(gears.color(fg))
 
@@ -184,17 +191,23 @@ end
 
 -- Generates normal, dark and light shade of buttons for a given base color.
 function button_variants(fg)
-    return button_image(fg), button_image(darker(fg, 30)), button_image(darker(fg, -30))
+    return button_image(fg), button_image(darker(fg, 30)),
+           button_image(darker(fg, -30))
 end
 
 -- Cache the buttons in variables, so we don't have to generate them multiple
 -- times as drawing them is expensive
 local button_images = {}
-button_images.red, button_images.red_dark, button_images.red_light = button_variants(xrdb.color8)
-button_images.yellow, button_images.yellow_dark, button_images.yellow_light = button_variants(xrdb.color10)
-button_images.green, button_images.green_dark, button_images.green_light = button_variants(xrdb.color11)
-button_images.blue, button_images.blue_dark, button_images.blue_light = button_variants(xrdb.color13)
-button_images.grey, button_images.grey_dark, button_images.grey_light = button_variants(xrdb.color3)
+button_images.red, button_images.red_dark, button_images.red_light =
+    button_variants(xrdb.color8)
+button_images.yellow, button_images.yellow_dark, button_images.yellow_light =
+    button_variants(xrdb.color10)
+button_images.green, button_images.green_dark, button_images.green_light =
+    button_variants(xrdb.color11)
+button_images.blue, button_images.blue_dark, button_images.blue_light =
+    button_variants(xrdb.color13)
+button_images.grey, button_images.grey_dark, button_images.grey_light =
+    button_variants(xrdb.color3)
 
 -- Association between colors and button types
 local button_types = {
@@ -226,7 +239,8 @@ local button_actions = {
 for button_type, button_color in pairs(button_types) do
     for i, window_state in ipairs({"normal", "focus"}) do
         for button_action, color_shade in pairs(button_actions) do
-            theme["titlebar_" .. button_type .. "_button_" .. window_state .. button_action] = button_images[button_color .. color_shade]
+            theme["titlebar_" .. button_type .. "_button_" .. window_state ..
+                button_action] = button_images[button_color .. color_shade]
         end
     end
 end

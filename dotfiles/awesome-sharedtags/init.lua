@@ -3,12 +3,9 @@
 -- @author Albert Diserholt
 -- @copyright 2016 Albert Diserholt
 -- @license MIT
-
 -- Grab environment we need
 local awful = require("awful")
-local capi = {
-    screen = screen
-}
+local capi = {screen = screen}
 
 local sharedtags = {
     _VERSION = "sharedtags v1.0.0 for v4.0",
@@ -60,7 +57,8 @@ end
 -- @treturn table The created tag.
 function sharedtags.add(i, t)
     t = awful.util.table.clone(t, false) -- shallow copy for modification
-    t.screen = (t.screen and t.screen <= capi.screen.count()) and t.screen or capi.screen.primary
+    t.screen = (t.screen and t.screen <= capi.screen.count()) and t.screen or
+                   capi.screen.primary
     t.sharedtagindex = i
     local tag = awful.tag.add(t.name or i, t)
 
@@ -97,7 +95,7 @@ end
 function sharedtags.new(def)
     local tags = {}
 
-    for i,t in ipairs(def) do
+    for i, t in ipairs(def) do
         tags[i] = sharedtags.add(i, t)
 
         -- Create an alias between the index and the name.
@@ -128,20 +126,18 @@ function sharedtags.movetag(tag, screen)
             -- try to find a fallback tag as well.
             if not oldscreen.selected_tag then
                 local newtag = awful.tag.find_fallback(oldscreen)
-                if newtag then
-                    newtag:view_only()
-                end
+                if newtag then newtag:view_only() end
             end
         end
 
         -- Also sort the tag in the taglist, by reapplying the index. This is just a nicety.
         local unpack = unpack or table.unpack
-        for _,s in ipairs({ screen, oldscreen }) do
-            local tags = { unpack(s.tags) } -- Copy
-            table.sort(tags, function(a, b) return a.sharedtagindex < b.sharedtagindex end)
-            for i,t in ipairs(tags) do
-                t.index = i
-            end
+        for _, s in ipairs({screen, oldscreen}) do
+            local tags = {unpack(s.tags)} -- Copy
+            table.sort(tags, function(a, b)
+                return a.sharedtagindex < b.sharedtagindex
+            end)
+            for i, t in ipairs(tags) do t.index = i end
         end
 
         return true
@@ -179,6 +175,8 @@ function sharedtags.viewtoggle(tag, screen)
     end
 end
 
-return setmetatable(sharedtags, { __call = function(...) return sharedtags.new(select(2, ...)) end })
+return setmetatable(sharedtags, {
+    __call = function(...) return sharedtags.new(select(2, ...)) end
+})
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
