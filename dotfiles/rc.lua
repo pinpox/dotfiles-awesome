@@ -16,7 +16,8 @@ beautiful = require("beautiful")
 
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init("~/.config/awesome/theme.lua")
-beautiful.init("~/Projects/dotfiles-awesome/dotfiles/theme.lua")
+local custom_theme = require("theme")
+beautiful.init(custom_theme)
 
 -- Add a gap around clients
 beautiful.useless_gap = 5

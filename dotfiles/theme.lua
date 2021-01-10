@@ -1,3 +1,6 @@
+
+local M =  {}
+
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
 ---------------------------------------------
 -- Awesome theme which follows xrdb config --
@@ -14,7 +17,7 @@ local themes_path = gfs.get_themes_dir()
 local theme = dofile(themes_path .. "default/theme.lua")
 -- load vector assets' generators for this theme
 
-theme.font = "Sauce Code Pro Nerd Font Semibold 9"
+M.font = "Sauce Code Pro Nerd Font Semibold 9"
 
 palette = {}
 
@@ -35,69 +38,69 @@ palette.base0D = xrdb.color13
 palette.base0E = xrdb.color14
 palette.base0F = xrdb.color15
 
-theme.bg_normal = palette.base00
-theme.bg_focus = palette.base0D
-theme.bg_urgent = palette.base09
-theme.bg_minimize = palette.base09
-theme.bg_systray = palette.base00
+M.bg_normal = palette.base00
+M.bg_focus = palette.base0D
+M.bg_urgent = palette.base09
+M.bg_minimize = palette.base09
+M.bg_systray = palette.base00
 
-theme.fg_normal = palette.base05
-theme.fg_focus = palette.base00
-theme.fg_urgent = palette.base00
-theme.fg_minimize = palette.base00
+M.fg_normal = palette.base05
+M.fg_focus = palette.base00
+M.fg_urgent = palette.base00
+M.fg_minimize = palette.base00
 
-theme.useless_gap = dpi(3)
-theme.border_width = dpi(2)
-theme.border_normal = palette.base03
-theme.border_focus = palette.base0D
-theme.border_marked = palette.base0A
+M.useless_gap = dpi(3)
+M.border_width = dpi(2)
+M.border_normal = palette.base03
+M.border_focus = palette.base0D
+M.border_marked = palette.base0A
 
 -- Taglist (workspace indicator)
-theme.taglist_fg_focus = palette.base00
-theme.taglist_bg_focus = palette.base0D
-theme.taglist_fg_urgent = palette.base00
-theme.taglist_bg_urgent = palette.base08
-theme.taglist_fg_occupied = palette.base05
-theme.taglist_bg_occupied = palette.base03
--- theme.taglist_fg_empty
--- theme.taglist_bg_empty
--- theme.taglist_fg_volatile
--- theme.taglist_bg_volatile
+M.taglist_fg_focus = palette.base00
+M.taglist_bg_focus = palette.base0D
+M.taglist_fg_urgent = palette.base00
+M.taglist_bg_urgent = palette.base08
+M.taglist_fg_occupied = palette.base05
+M.taglist_bg_occupied = palette.base03
+--M.taglist_fg_empty
+--M.taglist_bg_empty
+--M.taglist_fg_volatile
+--M.taglist_bg_volatile
 
 -- Tasklist (windows on workspace)
-theme.tasklist_fg_focus = palette.base00
-theme.tasklist_bg_focus = palette.base0D
-theme.tasklist_fg_urgent = palette.base00
-theme.tasklist_bg_urgent = palette.base08
+M.tasklist_fg_focus = palette.base00
+M.tasklist_bg_focus = palette.base0D
+M.tasklist_fg_urgent = palette.base00
+M.tasklist_bg_urgent = palette.base08
 
 -- Titlebar (window decorations)
-theme.titlebar_fg_normal = palette.base05
-theme.titlebar_bg_normal = palette.base00
-theme.titlebar_fg_focus = palette.base00
-theme.titlebar_bg_focus = palette.base0D
+M.titlebar_fg_normal = palette.base05
+M.titlebar_bg_normal = palette.base00
+M.titlebar_fg_focus = palette.base00
+M.titlebar_bg_focus = palette.base0D
 --
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
 -- Example:
--- theme.taglist_bg_focus = "#ff0000"
+--M.taglist_bg_focus = "#ff0000"
 
-theme.tooltip_fg = theme.fg_normal
-theme.tooltip_bg = theme.bg_normal
+M.tooltip_fg =M.fg_normal
+M.tooltip_bg =M.bg_normal
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
-theme.menu_submenu_icon = themes_path .. "default/submenu.png"
-theme.menu_height = dpi(16)
-theme.menu_width = dpi(100)
+M.menu_submenu_icon = themes_path .. "default/submenu.png"
+M.menu_height = dpi(16)
+M.menu_width = dpi(100)
 
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
--- theme.bg_widget = "#cc0000"
+--M.bg_widget = "#cc0000"
 
 -- Recolor Layout icons:
-theme = theme_assets.recolor_layout(theme, theme.fg_normal)
+theme = theme_assets.recolor_layout(theme,M.fg_normal)
 
 -- Recolor titlebar icons:
 --
@@ -116,28 +119,28 @@ theme = theme_assets.recolor_titlebar(theme, palette.base05, "normal")
 theme = theme_assets.recolor_titlebar(theme, palette.base03, "normal", "hover")
 theme = theme_assets.recolor_titlebar(theme, palette.base01, "normal", "press")
 theme = theme_assets.recolor_titlebar(theme, palette.base00, "focus")
-theme = theme_assets.recolor_titlebar(theme, darker(theme.fg_focus, -60),
+theme = theme_assets.recolor_titlebar(theme, darker(M.fg_focus, -60),
                                       "focus", "hover")
 theme = theme_assets.recolor_titlebar(theme, palette.base01, "focus", "press")
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = nil
+M.icon_theme = nil
 
 -- Generate Awesome icon:
-theme.awesome_icon = theme_assets.awesome_icon(theme.menu_height,
+M.awesome_icon = theme_assets.awesome_icon(M.menu_height,
                                                palette.base0E, palette.base00)
 
 -- Generate taglist squares:
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel(dpi(5),
+M.taglist_squares_sel = theme_assets.taglist_squares_sel(dpi(5),
                                                              palette.base05)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(dpi(5),
+M.taglist_squares_unsel = theme_assets.taglist_squares_unsel(dpi(5),
                                                                  palette.base05)
 
 -- Generate wallpaper:
 local cairo = require("lgi").cairo
 
-theme.wallpaper = function(s)
+M.wallpaper = function(s)
     -- return gen_wallpaper(wallpaper_bg, wallpaper_fg, wallpaper_alt_fg, s)
     s = s or screen.primary
     local height = s.geometry.height
