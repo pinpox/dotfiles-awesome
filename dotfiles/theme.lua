@@ -248,4 +248,5 @@ for button_type, button_color in pairs(button_types) do
     end
 end
 
-return theme
+return M
+
