@@ -74,7 +74,7 @@ awful.rules.rules = {
         }
     },
     { rule = { floating = true },
-  properties = {ontop = true} }
+  properties = {ontop = true} },
     {
         rule = { class = "Firefox" },
         properties = {
