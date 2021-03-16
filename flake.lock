@@ -2,11 +2,11 @@
   "nodes": {
     "nixpkgs": {
       "locked": {
-        "lastModified": 1610842533,
-        "narHash": "sha256-6hW8CML8RnNrRJMv7E56rXAhsCNgUM97HIVSqWxnO64=",
+        "lastModified": 1615797423,
+        "narHash": "sha256-5NGDZXPQzuoxf/42NiyC9YwwhwzfMfIRrz3aT0XHzSc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "68398d2dd50efc2d878bf0f83bbc8bc323b6b0e0",
+        "rev": "266dc8c3d052f549826ba246d06787a219533b8f",
         "type": "github"
       },
       "original": {
@@ -25,11 +25,11 @@
     "wallpaper-generator": {
       "flake": false,
       "locked": {
-        "lastModified": 1610991572,
-        "narHash": "sha256-TYnKJr+CIXFNSD18xqOgXD0ck+4HBf+/3ZCuYMhcgGk=",
+        "lastModified": 1615819231,
+        "narHash": "sha256-vZzc1ViF/3rCm81+x+pyneuOzoWd0przy9ULgwhGSj4=",
         "owner": "pinpox",
         "repo": "wallpaper-generator",
-        "rev": "9e61ad0de3a924447c7113dac5e1a34a0b8af708",
+        "rev": "a2223b9b0c51e0eee0d0b23a5e87228e370bdd5c",
         "type": "github"
       },
       "original": {
