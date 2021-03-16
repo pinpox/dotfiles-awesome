@@ -109,11 +109,14 @@ awful.key({}, "Print", function ()
 end, {description = "Screenshot to Clipboard", group = "Other"}),
 
 -- Prompt
-awful.key({ modkey }, "r", function ()
-	awful.screen.focused().mypromptbox:run()
-end, {description = "Run command", group = "Other"}),
+-- awful.key({ modkey }, "r", function ()
+-- 	awful.screen.focused().mypromptbox:run()
+-- end, {description = "Run command", group = "Other"}),
 
 awful.key({ modkey }, "p", function()
+	-- TODO replace with rofi or fullscreen textbox
+    -- s = s or screen.primary
+	-- menubar.geometry = {x = "0", y = "0",height = s.geometry.height}
 	menubar.show()
 end, {description = "Run application", group = "Other"})
 )
