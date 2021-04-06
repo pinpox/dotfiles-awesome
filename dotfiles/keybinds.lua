@@ -94,6 +94,12 @@ awful.key({ modkey, }, "Return", function ()
 	awful.spawn(terminal)
 end, {description = "Open terminal", group = "Other"}),
 
+
+-- Standard programs
+awful.key({ modkey, "Shift" }, "Return", function ()
+	awful.spawn(terminal .. " -e tmux a")
+end, {description = "Open terminal, attach to tmux", group = "Other"}),
+
 -- Other
 awful.key({ modkey, }, "/", hotkeys_popup.show_help,
 {description="Show help", group="Other"}),
