@@ -9,7 +9,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
-require("awful.hotkeys_popup.keys")
+-- require("awful.hotkeys_popup.keys")
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
