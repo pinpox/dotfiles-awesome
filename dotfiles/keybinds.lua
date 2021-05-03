@@ -100,6 +100,19 @@ awful.key({ modkey, "Shift" }, "Return", function ()
 	awful.spawn(terminal .. " -e tmux a")
 end, {description = "Open terminal, attach to tmux", group = "Other"}),
 
+-- Multimedia keys
+awful.key({}, "#122", function ()
+	awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -1000")
+end, {description = "Lower volume", group = "Multimedia"}),
+
+awful.key({}, "#123", function ()
+	awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +1000")
+end, {description = "Raise volume", group = "Multimedia"}),
+
+awful.key({}, "#172", function ()
+	awful.spawn("playerctl play-pause")
+end, {description = "Play/Pause", group = "Multimedia"}),
+
 -- Other
 awful.key({ modkey, }, "/", hotkeys_popup.show_help,
 {description="Show help", group="Other"}),
