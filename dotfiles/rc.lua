@@ -3,6 +3,7 @@
 pcall(require, "luarocks.loader")
 
 math.randomseed(os.time())
+
 -- Standard awesome library
 gears = require("gears")
 awful = require("awful")
@@ -16,7 +17,6 @@ beautiful = require("beautiful")
 
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("~/.config/awesome/theme.lua")
--- beautiful.init("~/Projects/dotfiles-awesome/dotfiles/theme.lua")
 
 -- Add a gap around clients
 beautiful.useless_gap  = 5
@@ -73,8 +73,12 @@ awful.rules.rules = {
             maximized = false
         }
     },
-    { rule = { floating = true },
-  properties = {ontop = true} },
+
+    {
+        rule = { floating = true },
+        properties = {ontop = true}
+    },
+
     {
         rule = { class = "Firefox" },
         properties = {
@@ -110,8 +114,9 @@ awful.rules.rules = {
             floating = false
         }
     },
+
     {
-    -- Floating clients.
+        -- Floating clients.
         rule_any = {
             instance = { "pinentry", },
             class = {
@@ -159,10 +164,10 @@ local function set_wallpaper(s)
     end
 end
 
+-- Wallpaper on all screens
 awful.screen.connect_for_each_screen(function(s)
-    -- Wallpaper
     set_wallpaper(s)
-end   )
+end)
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
@@ -176,7 +181,7 @@ client.connect_signal("manage", function (c)
 
     -- Rounded corners for all clients, 5px radius
     c.shape = function(cr,w,h)
-            gears.shape.rounded_rect(cr,w,h,5)
+        gears.shape.rounded_rect(cr,w,h,5)
     end
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
@@ -208,44 +213,46 @@ client.connect_signal("request::titlebars", function(c)
     })
 
     awful.titlebar(c) : setup {
-        { -- Left
-        -- add margin around titlebar icons
         {
-            awful.titlebar.widget.iconwidget(c),
+            -- Left
+            {
+            -- add margin around titlebar icons
+                awful.titlebar.widget.iconwidget(c),
+                layout = wibox.container.margin,
+                top = 5,
+                left = 5,
+                bottom = 5
+            },
+            buttons = buttons,
+            layout  = wibox.layout.fixed.horizontal
+        },
+        {
+            -- Middle
+            {
+                -- Title
+                align  = "center",
+                widget = awful.titlebar.widget.titlewidget(c)
+            },
+            buttons = buttons,
+            layout  = wibox.layout.flex.horizontal
+        },
+        {
+            -- Right
+            {
+                awful.titlebar.widget.floatingbutton (c),
+                awful.titlebar.widget.stickybutton   (c),
+                -- awful.titlebar.widget.ontopbutton    (c),
+                awful.titlebar.widget.closebutton    (c),
+                layout = wibox.layout.fixed.horizontal()
+            },
             layout = wibox.container.margin,
-            top = 5,
-            left = 5,
-            bottom = 5
+            top = 3,
+            left = 3,
+            right = 3,
+            bottom = 3
         },
-        buttons = buttons,
-        layout  = wibox.layout.fixed.horizontal
-    },
-    { -- Middle
-    { -- Title
-    align  = "center",
-    widget = awful.titlebar.widget.titlewidget(c)
-},
-buttons = buttons,
-layout  = wibox.layout.flex.horizontal
-        },
-        { -- Right
-        {
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.stickybutton   (c),
-            -- awful.titlebar.widget.ontopbutton    (c),
-            awful.titlebar.widget.closebutton    (c),
-            layout = wibox.layout.fixed.horizontal()
-        },
-        layout = wibox.container.margin,
-        top = 3,
-        left = 3,
-        right = 3,
-        bottom = 3
-
-    },
-    layout = wibox.layout.align.horizontal
-}
-end)
+        layout = wibox.layout.align.horizontal
+    } end)
 
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
@@ -255,6 +262,7 @@ end)
 client.connect_signal("focus", function(c)
     c.border_color = beautiful.border_focus
 end)
+
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
