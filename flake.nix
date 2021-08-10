@@ -37,14 +37,7 @@
       in rec {
         packages = flake-utils.lib.flattenTree rec {
 
-          awesome-configuration = let
-
-            test-awesome = pkgs.writeScript "test-awesome" ''
-              #!/usr/bin/env bash
-              set -eu -o pipefail
-              Xephyr :5 & sleep 1 ; DISPLAY=:5 ${pkgs.awesome}/bin/awesome -c ./dotfiles/rc.lua
-            '';
-          in pkgs.stdenv.mkDerivation rec {
+          awesome-configuration = pkgs.stdenv.mkDerivation rec {
             pname = "awesome-configration";
             version = "1.0";
 
@@ -57,7 +50,21 @@
 
             installPhase = ''
               cp -r . $out
-              cp ${test-awesome} $out/run-test
+
+              cat >$out/run-test <<EOL
+
+              #!/usr/bin/env bash
+              set -eu -o pipefail
+
+              echo "RUNNING LS"
+              pwd
+              ls
+              echo $out
+              Xephyr :5 & sleep 1 ; DISPLAY=:5 ${pkgs.awesome}/bin/awesome -c $out/rc.lua
+              EOL
+
+              chmod +x $out/run-test
+
             '';
 
             meta = with pkgs.lib; {
