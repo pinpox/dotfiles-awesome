@@ -15,7 +15,8 @@ local themes_path = gfs.get_themes_dir()
 local theme = dofile(themes_path.."default/theme.lua")
 -- load vector assets' generators for this theme
 
-theme.font = "Sauce Code Pro Nerd Font Semibold 9"
+theme.font = "Recursive Sans Linear Static Medium 9"
+
 
 palette = {}
 

@@ -9,7 +9,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
-require("awful.hotkeys_popup.keys")
+-- require("awful.hotkeys_popup.keys")
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
@@ -94,6 +94,25 @@ awful.key({ modkey, }, "Return", function ()
 	awful.spawn(terminal)
 end, {description = "Open terminal", group = "Other"}),
 
+
+-- Standard programs
+awful.key({ modkey, "Shift" }, "Return", function ()
+	awful.spawn(terminal .. " -e tmux a")
+end, {description = "Open terminal, attach to tmux", group = "Other"}),
+
+-- Multimedia keys
+awful.key({}, "#122", function ()
+	awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -1000")
+end, {description = "Lower volume", group = "Multimedia"}),
+
+awful.key({}, "#123", function ()
+	awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +1000")
+end, {description = "Raise volume", group = "Multimedia"}),
+
+awful.key({}, "#172", function ()
+	awful.spawn("playerctl play-pause")
+end, {description = "Play/Pause", group = "Multimedia"}),
+
 -- Other
 awful.key({ modkey, }, "/", hotkeys_popup.show_help,
 {description="Show help", group="Other"}),
@@ -109,11 +128,14 @@ awful.key({}, "Print", function ()
 end, {description = "Screenshot to Clipboard", group = "Other"}),
 
 -- Prompt
-awful.key({ modkey }, "r", function ()
-	awful.screen.focused().mypromptbox:run()
-end, {description = "Run command", group = "Other"}),
+-- awful.key({ modkey }, "r", function ()
+-- 	awful.screen.focused().mypromptbox:run()
+-- end, {description = "Run command", group = "Other"}),
 
 awful.key({ modkey }, "p", function()
+	-- TODO replace with rofi or fullscreen textbox
+    -- s = s or screen.primary
+	-- menubar.geometry = {x = "0", y = "0",height = s.geometry.height}
 	menubar.show()
 end, {description = "Run application", group = "Other"})
 )
