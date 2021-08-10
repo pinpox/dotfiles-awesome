@@ -8,6 +8,9 @@
 
   outputs = { self, nixpkgs, wallpaper-generator }: {
 
+    # TODO specify as default app:
+    # Xephyr :5 & sleep 1 ; DISPLAY=:5 awesome
+
     nixosModules = {
       dotfiles = { config, ... }: {
         home.file = {
