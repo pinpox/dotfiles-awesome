@@ -5,33 +5,35 @@ pcall(require, "luarocks.loader")
 math.randomseed(os.time())
 
 -- Standard awesome library
-gears = require("gears")
-awful = require("awful")
+local gears = require("gears")
+local awful = require("awful")
 require("awful.autofocus")
 
 -- Widget and layout library
-wibox = require("wibox")
+local wibox = require("wibox")
 
 -- Theme handling library
-beautiful = require("beautiful")
+local beautiful = require("beautiful")
 
--- Themes define colours, icons, font and wallpapers.
-beautiful.init("~/.config/awesome/theme.lua")
+-- Themes define colours, icons, font and wallpapers. The environment variable
+-- provides an option to override the default, e.g. when running in xephyr
+beautiful.init(os.getenv("AWESOME_THEME") or "~/.config/awesome/theme.lua")
+
 
 -- Add a gap around clients
 beautiful.useless_gap  = 5
 
 -- This is used later as the default terminal and editor to run.
-terminal = "wezterm"
-editor = os.getenv("EDITOR") or "nvim"
-editor_cmd = terminal .. " -e " .. editor
+Terminal = "wezterm"
+Editor = os.getenv("EDITOR") or "nvim"
+EditorCmd = Terminal .. " -e " .. Editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod4"
+Modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -39,18 +41,12 @@ awful.layout.layouts = {
     awful.layout.suit.tile,
 }
 
-function filelog(text)
-    file = io.open("awesomelog", "a")
-    io.output(file)
-    io.write(text, "\n")
-    io.close(file)
-end
 
 -- {{{ Tags
-tags = require("tags")
+local tags = require("tags")
 
 require("mainmenu")
-require("keybinds")
+local keys = require("keybinds")
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
@@ -63,8 +59,8 @@ awful.rules.rules = {
             border_color = beautiful.border_normal,
             focus = awful.client.focus.filter,
             raise = true,
-            keys = clientkeys,
-            buttons = clientbuttons,
+            keys = keys.client,
+            buttons = keys.clientbuttons,
             screen = awful.screen.preferred,
             placement = awful.placement.no_overlap+awful.placement.no_offscreen,
             maximized_vertical   = false,
@@ -173,7 +169,7 @@ end)
 screen.connect_signal("property::geometry", set_wallpaper)
 
 -- Set keys
-root.keys(globalkeys)
+root.keys(keys.global)
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
@@ -208,9 +204,10 @@ client.connect_signal("request::titlebars", function(c)
         awful.mouse.client.resize(c)
     end)
     )
-    local titlebar = awful.titlebar(c, {
-        height = 24
-    })
+
+    -- local titlebar = awful.titlebar(c, {
+    --     height = 24
+    -- })
 
     awful.titlebar(c) : setup {
         {

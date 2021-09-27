@@ -1,14 +1,18 @@
 -- {{{ Wibar
+local awful = require("awful")
+local gears = require("gears")
+local wibox = require("wibox")
+
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
 awful.button({ }, 1, function(t) t:view_only() end),
-awful.button({ modkey }, 1, function(t)
+awful.button({ Modkey }, 1, function(t)
 	if client.focus then
 		client.focus:move_to_tag(t)
 	end
 end),
 awful.button({ }, 3, awful.tag.viewtoggle),
-awful.button({ modkey }, 3, function(t)
+awful.button({ Modkey }, 3, function(t)
 	if client.focus then
 		client.focus:toggle_tag(t)
 	end
@@ -42,8 +46,8 @@ awful.button({ }, 5, function ()
 end))
 
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%H:%M ")
-month_calendar = awful.widget.calendar_popup.month({
+local mytextclock = wibox.widget.textclock("%H:%M ")
+local month_calendar = awful.widget.calendar_popup.month({
 	bg = "#00fff0",
 })
 
@@ -112,7 +116,7 @@ awful.screen.connect_for_each_screen(function(s)
 		},
 	}
 
-	function custom_shape(cr, width, height)
+	local function custom_shape(cr, width, height)
 		gears.shape.transform(gears.shape.rounded_rect) : translate(10, 0) (cr, width -20, height -10, 5)
 	end
 

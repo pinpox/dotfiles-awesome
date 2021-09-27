@@ -4,6 +4,7 @@
 --   by Yauhen Kirylau                    --
 ---------------------------------------------
 
+local gears = require("gears")
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
@@ -17,8 +18,7 @@ local theme = dofile(themes_path.."default/theme.lua")
 
 theme.font = "Recursive Sans Linear Static Medium 9"
 
-
-palette = {}
+local palette = {}
 
 palette.base00 = xrdb.color0
 palette.base01 = xrdb.color1

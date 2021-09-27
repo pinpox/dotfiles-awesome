@@ -1,7 +1,7 @@
 local awful = require("awful")
-mymainmenu = awful.menu({ items = { { "edit config", editor_cmd .. " " .. awesome.conffile },
+mymainmenu = awful.menu({ items = { { "edit config", EditorCmd .. " " .. awesome.conffile },
 { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
-{ "manual", terminal .. " -e man awesome" },
+{ "manual", Terminal .. " -e man awesome" },
 { "restart", awesome.restart },
 { "quit", function() awesome.quit() end },
 } })

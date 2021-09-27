@@ -60,7 +60,8 @@
               pwd
               ls
               echo $out
-              Xephyr :5 & sleep 1 ; DISPLAY=:5 ${pkgs.awesome}/bin/awesome -c $out/rc.lua
+              export AWESOME_THEME=$out/theme.lua
+              Xephyr :5 & sleep 1 ; DISPLAY=:5 ${pkgs.awesome}/bin/awesome -c $out/rc.lua --search $out
               EOL
 
               chmod +x $out/run-test

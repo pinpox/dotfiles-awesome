@@ -1,4 +1,5 @@
 -- {{{ Tags
+local awful = require("awful")
 sharedtags = require("awesome-sharedtags")
 tags = sharedtags({
     -- Create all tags, only non-empty and focused will be shown

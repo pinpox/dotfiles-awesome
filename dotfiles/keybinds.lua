@@ -2,11 +2,13 @@ local awful = require("awful")
 local gears = require("gears")
 local menubar = require("menubar")
 
+local M = {}
+
 -- Menubar configuration
-menubar.utils.terminal = terminal -- Set the terminal for applications that require it
+menubar.utils.Terminal = Terminal -- Set the terminal for applications that require it
 -- }}}
 
-hotkeys_popup = require("awful.hotkeys_popup")
+local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 -- require("awful.hotkeys_popup.keys")
@@ -20,46 +22,46 @@ awful.button({ }, 5, awful.tag.viewprev)
 -- }}}
 
 -- {{{ Key bindings
-globalkeys = gears.table.join(
+local globalkeys = gears.table.join(
 
 -- Focus
 
 -- Focus right
-awful.key({ modkey, }, "h", function ()
+awful.key({ Modkey, }, "h", function ()
 	awful.client.focus.global_bydirection("left")
 end, {description = "Focus right", group = "Focus"}),
 
 -- Focus left
-awful.key({ modkey, }, "l", function ()
+awful.key({ Modkey, }, "l", function ()
 	awful.client.focus.global_bydirection("right")
 end, {description = "Focus left", group = "Focus"}),
 
 -- Focus below
-awful.key({ modkey, }, "j", function ()
+awful.key({ Modkey, }, "j", function ()
 	awful.client.focus.global_bydirection("down")
 end, {description = "Focus below", group = "Focus"}),
 
 -- Focus above
-awful.key({ modkey, }, "k", function ()
+awful.key({ Modkey, }, "k", function ()
 	awful.client.focus.global_bydirection("up")
 end, {description = "Focus above", group = "Focus"}),
 
 -- Focus urgent
-awful.key({ modkey, }, "u", awful.client.urgent.jumpto,
+awful.key({ Modkey, }, "u", awful.client.urgent.jumpto,
 {description = "jump to urgent client", group = "Focus"}),
 
 -- Cycle with mod+tab
-awful.key({ modkey, }, "Tab", function ()
+awful.key({ Modkey, }, "Tab", function ()
 	awful.client.focus.byidx( 1)
 end, {description = "Focus next", group = "Focus"}),
 
-awful.key({ modkey, "Shift"}, "Tab", function ()
+awful.key({ Modkey, "Shift"}, "Tab", function ()
 	awful.client.focus.byidx(-1)
 end, {description = "Focus previous", group = "Focus"}
 ),
 
 -- Focus previous window (back-n-forth)
-awful.key({ modkey, }, "`", function ()
+awful.key({ Modkey, }, "`", function ()
 	awful.client.focus.history.previous()
 	if client.focus then
 		client.focus:raise()
@@ -67,37 +69,37 @@ awful.key({ modkey, }, "`", function ()
 end, {description = "go back", group = "Focus"}),
 
 -- Switch layout tiling/tab
-awful.key({ modkey, }, "space", function ()
+awful.key({ Modkey, }, "space", function ()
 	awful.layout.inc( 1)
 end, {description = "Next layout", group = "Layout"}),
 
 -- Master window
-awful.key({ modkey, }, "]", function ()
+awful.key({ Modkey, }, "]", function ()
 	awful.tag.incmwfact( 0.05)
 end, {description = "Grow master", group = "Layout"}),
 
-awful.key({ modkey, }, "[", function ()
+awful.key({ Modkey, }, "[", function ()
 	awful.tag.incmwfact(-0.05)
 end, {description = "Shrink master", group = "Layout"}),
 
 -- Stack windows
-awful.key({ modkey, }, "=", function ()
+awful.key({ Modkey, }, "=", function ()
 	awful.tag.incncol( 1, nil, true)
 end, {description = "Add columns", group = "Layout"}),
 
-awful.key({ modkey, }, "-", function ()
+awful.key({ Modkey, }, "-", function ()
 	awful.tag.incncol(-1, nil, true)
 end, {description = "Substract columns", group = "Layout"}),
 
 -- Standard programs
-awful.key({ modkey, }, "Return", function ()
-	awful.spawn(terminal)
+awful.key({ Modkey, }, "Return", function ()
+	awful.spawn(Terminal)
 end, {description = "Open terminal", group = "Other"}),
 
 
 -- Standard programs
-awful.key({ modkey, "Shift" }, "Return", function ()
-	awful.spawn(terminal .. " -e tmux a")
+awful.key({ Modkey, "Shift" }, "Return", function ()
+	awful.spawn(Terminal .. " -e tmux a")
 end, {description = "Open terminal, attach to tmux", group = "Other"}),
 
 -- Multimedia keys
@@ -114,13 +116,13 @@ awful.key({}, "#172", function ()
 end, {description = "Play/Pause", group = "Multimedia"}),
 
 -- Other
-awful.key({ modkey, }, "/", hotkeys_popup.show_help,
+awful.key({ Modkey, }, "/", hotkeys_popup.show_help,
 {description="Show help", group="Other"}),
 
-awful.key({ modkey, "Control" }, "r", awesome.restart,
+awful.key({ Modkey, "Control" }, "r", awesome.restart,
 {description = "Reload awesome", group = "Other"}),
 
-awful.key({ modkey, "Shift"   }, "e", awesome.quit,
+awful.key({ Modkey, "Shift"   }, "e", awesome.quit,
 {description = "Quit awesome", group = "Other"}),
 
 awful.key({}, "Print", function ()
@@ -132,7 +134,7 @@ end, {description = "Screenshot to Clipboard", group = "Other"}),
 -- 	awful.screen.focused().mypromptbox:run()
 -- end, {description = "Run command", group = "Other"}),
 
-awful.key({ modkey }, "p", function()
+awful.key({ Modkey }, "p", function()
 	-- TODO replace with rofi or fullscreen textbox
     -- s = s or screen.primary
 	-- menubar.geometry = {x = "0", y = "0",height = s.geometry.height}
@@ -140,35 +142,35 @@ awful.key({ modkey }, "p", function()
 end, {description = "Run application", group = "Other"})
 )
 
-clientkeys = gears.table.join(
+local clientkeys = gears.table.join(
 
 -- Fullscreen and floating toggle
-awful.key({ modkey, }, "f", function (c)
+awful.key({ Modkey, }, "f", function (c)
 	c.fullscreen = not c.fullscreen
 	c:raise()
 end, {description = "Toggle fullscreen", group = "Window"}),
 
-awful.key({ modkey, "Control" }, "space", awful.client.floating.toggle                     ,
+awful.key({ Modkey, "Control" }, "space", awful.client.floating.toggle                     ,
 {description = "Toggle floating", group = "Window"}),
 
-awful.key({ modkey, "Shift" }, "q", function (c)
+awful.key({ Modkey, "Shift" }, "q", function (c)
 	c:kill()
 end, {description = "close", group = "Window"}),
 
 -- Make master
-awful.key({ modkey, }, "m", function (c)
+awful.key({ Modkey, }, "m", function (c)
 	c:swap(awful.client.getmaster())
 end, {description = "move to master", group = "Window"}),
 
 -- Minimize and restore
-awful.key({ modkey,           }, "n",
+awful.key({ Modkey,           }, "n",
 function (c)
 	-- The client currently has the input focus, so it cannot be
 	-- minimized, since minimized clients can't have the focus.
 	c.minimized = true
 end , {description = "minimize", group = "Window"}),
 
-awful.key({ modkey, "Shift" }, "n",
+awful.key({ Modkey, "Shift" }, "n",
 function ()
 	local c = awful.client.restore()
 	-- Focus restored client
@@ -187,7 +189,7 @@ end, {description = "restore minimized", group = "Window"})
 for i = 1, 9 do
 	globalkeys = gears.table.join(globalkeys,
 	-- View tag only.
-	awful.key({ modkey }, "#" .. i + 9,
+	awful.key({ Modkey }, "#" .. i + 9,
 	function ()
 		local tag = tags[i]
 		if #tag:clients()==0 and not tag.selected then
@@ -200,7 +202,7 @@ for i = 1, 9 do
 	end,
 	{description = "view tag #"..i, group = "Workspaces"}),
 	-- Toggle tag display.
-	awful.key({ modkey, "Control" }, "#" .. i + 9,
+	awful.key({ Modkey, "Control" }, "#" .. i + 9,
 	function ()
 		local screen = awful.screen.focused()
 		local tag = tags[i]
@@ -210,7 +212,7 @@ for i = 1, 9 do
 	end,
 	{description = "toggle tag #" .. i, group = "Workspaces"}),
 	-- Move client to tag.
-	awful.key({ modkey, "Shift" }, "#" .. i + 9,
+	awful.key({ Modkey, "Shift" }, "#" .. i + 9,
 	function ()
 		if client.focus then
 			local tag = tags[i]
@@ -221,7 +223,7 @@ for i = 1, 9 do
 	end,
 	{description = "move focused client to tag #"..i, group = "Workspaces"}),
 	-- Toggle tag on focused client.
-	awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+	awful.key({ Modkey, "Control", "Shift" }, "#" .. i + 9,
 	function ()
 		if client.focus then
 			local tag = tags[i]
@@ -234,16 +236,24 @@ for i = 1, 9 do
 	)
 end
 
-clientbuttons = gears.table.join(
+local clientbuttons = gears.table.join(
 awful.button({ }, 1, function (c)
 	c:emit_signal("request::activate", "mouse_click", {raise = true})
 end),
-awful.button({ modkey }, 1, function (c)
+awful.button({ Modkey }, 1, function (c)
 	c:emit_signal("request::activate", "mouse_click", {raise = true})
 	awful.mouse.client.move(c)
 end),
-awful.button({ modkey }, 3, function (c)
+awful.button({ Modkey }, 3, function (c)
 	c:emit_signal("request::activate", "mouse_click", {raise = true})
 	awful.mouse.client.resize(c)
 end)
 )
+
+M.global = globalkeys
+M.client = clientkeys
+M.clientbuttons= clientbuttons
+
+return M
+
+
