@@ -1,3 +1,5 @@
+
+local hotkeys_popup = require("awful.hotkeys_popup")
 local awful = require("awful")
 mymainmenu = awful.menu(
 {
