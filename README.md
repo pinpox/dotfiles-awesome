@@ -1,8 +1,8 @@
 # dotfiles-awesome
 
-![image](https://user-images.githubusercontent.com/1719781/135058892-5b339356-6254-4d0b-b27e-2de60a0ce49b.png)
-
 Configuration for the [Awesome window manager](https://awesomewm.org/)
+
+![image](https://user-images.githubusercontent.com/1719781/135058892-5b339356-6254-4d0b-b27e-2de60a0ce49b.png)
 
 ## Usage in NixOS with home-manager
 
