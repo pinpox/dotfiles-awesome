@@ -125,6 +125,10 @@ awful.key({ Modkey, "Control" }, "r", awesome.restart,
 awful.key({ Modkey, "Shift"   }, "e", awesome.quit,
 {description = "Quit awesome", group = "Other"}),
 
+awful.key({ Modkey, "Shift"}, "x", function ()
+	awful.spawn("xscreensaver-command -lock")
+end, {description = "Lock Screen", group = "Other"}),
+
 awful.key({}, "Print", function ()
 	awful.spawn.with_shell("import png:- | xclip -selection clipboard -t image/png")
 end, {description = "Screenshot to Clipboard", group = "Other"}),
