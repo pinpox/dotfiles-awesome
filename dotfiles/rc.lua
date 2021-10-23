@@ -38,8 +38,8 @@ awful.rules.rules = require("clientrules")
 -- Error notifications
 require("errors")
 
--- Taskbar
-require("bar")
+-- Ui elements
+require("ui")
 
 -- Generate and set wallpaper
 require("wallpaper")
@@ -49,5 +49,8 @@ local clientsignals = require("clientsignals")
 for signal, fun in pairs(clientsignals ) do
     client.connect_signal(signal, fun)
 end
+
+
+require("signals")
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80

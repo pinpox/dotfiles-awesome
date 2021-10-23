@@ -20,11 +20,18 @@ awful.button({ }, 4, awful.tag.viewnext),
 awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
+--
 
 -- {{{ Key bindings
 local globalkeys = gears.table.join(
 
 -- Focus
+--
+--
+
+awful.key({ Modkey }, "z", function()
+    awesome.emit_signal("signals::dasboard_toggle")
+end, {description = "show or hide sidebar", group = "awesome"}),
 
 -- Focus right
 awful.key({ Modkey, }, "h", function ()

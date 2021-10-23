@@ -47,6 +47,7 @@ end))
 
 -- Create a textclock widget
 local mytextclock = wibox.widget.textclock("%H:%M ")
+
 local month_calendar = awful.widget.calendar_popup.month({
 	bg = "#00fff0",
 })
@@ -57,6 +58,10 @@ mytextclock:connect_signal("button::press",
 function(_, _, _, button)
 	if button == 1 then month_calendar:toggle() end
 end)
+
+local round_rect2 = function(cr, width, height)
+	gears.shape.rounded_rect(cr, width, height, 2)
+end
 
 awful.screen.connect_for_each_screen(function(s)
 	-- Assign tags to the newly connected screen here,
@@ -75,6 +80,22 @@ awful.screen.connect_for_each_screen(function(s)
 	-- Create a taglist widget
 	s.mytaglist = awful.widget.taglist {
 		screen  = s,
+		style = {
+			shape =  round_rect2,
+		},
+		widget_template = {
+			{
+				{
+					id     = 'text_role',
+					widget = wibox.widget.textbox,
+				},
+				left  = 8,
+				right = 8,
+				widget  = wibox.container.margin,
+			},
+			id     = 'background_role',
+			widget = wibox.container.background,
+		},
 		-- Only show tags that are not empty
 		filter  = awful.widget.taglist.filter.noempty,
 		buttons = taglist_buttons

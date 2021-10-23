@@ -55,13 +55,8 @@
 
               #!/usr/bin/env bash
               set -eu -o pipefail
-
-              echo "RUNNING LS"
-              pwd
-              ls
-              echo $out
               export AWESOME_THEME=$out/theme.lua
-              Xephyr :5 & sleep 1 ; DISPLAY=:5 ${pkgs.awesome}/bin/awesome -c $out/rc.lua --search $out
+              Xephyr :5 -screen 1024x768 & sleep 1 ; DISPLAY=:5 ${pkgs.awesome}/bin/awesome -c $out/rc.lua --search $out
               EOL
 
               chmod +x $out/run-test
