@@ -16,7 +16,9 @@ local themes_path = gfs.get_themes_dir()
 local theme = dofile(themes_path.."default/theme.lua")
 -- load vector assets' generators for this theme
 
-theme.font = "Recursive Sans Linear Static Medium 9"
+theme.font_family = "Recursive Sans Linear Static Medium"
+theme.font_size = "9"
+theme.font =  theme.font_family .. " " .. theme.font_size
 
 local palette = {}
 
@@ -65,6 +67,11 @@ theme.taglist_bg_occupied = palette.base03
 -- theme.taglist_bg_empty
 -- theme.taglist_fg_volatile
 -- theme.taglist_bg_volatile
+
+theme.taglist_spacing = 5
+-- theme.taglist_shape = gears.shape.rounded_rect
+--
+
 
 -- Tasklist (windows on workspace)
 theme.tasklist_fg_focus = palette.base00

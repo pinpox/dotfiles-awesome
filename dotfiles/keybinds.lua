@@ -20,11 +20,18 @@ awful.button({ }, 4, awful.tag.viewnext),
 awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
+--
 
 -- {{{ Key bindings
 local globalkeys = gears.table.join(
 
 -- Focus
+--
+--
+
+awful.key({ Modkey }, "z", function()
+    awesome.emit_signal("signals::dasboard_toggle")
+end, {description = "show or hide sidebar", group = "awesome"}),
 
 -- Focus right
 awful.key({ Modkey, }, "h", function ()
@@ -129,7 +136,7 @@ awful.key({ Modkey, "Shift"}, "x", function ()
 	awful.spawn("xscreensaver-command -lock")
 end, {description = "Lock Screen", group = "Other"}),
 
-awful.key({}, "Print", function ()
+awful.key({}, "119", function ()
 	awful.spawn.with_shell("import png:- | xclip -selection clipboard -t image/png")
 end, {description = "Screenshot to Clipboard", group = "Other"}),
 
