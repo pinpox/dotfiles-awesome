@@ -31,7 +31,10 @@ local M = {
 
     {
         rule = { floating = true },
-        properties = {ontop = true}
+        properties = {
+			ontop = true,
+			above = true
+		}
     },
 
     {
