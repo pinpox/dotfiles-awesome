@@ -3,7 +3,6 @@ local M = {}
 
 local gears = require("gears")
 local awful = require("awful")
-local naughty = require("naughty")
 
 -- Widget and layout library
 local wibox = require("wibox")
@@ -110,15 +109,6 @@ end
 
 M["focus"] =  function(c)
 		c.border_color = beautiful.border_focus
-end
-
--- M["property::floating"] =  function(c)
--- 		c.border_color = beautiful.border_focus
--- end
-
-M["property::floating"] = function(c)
-    -- if c.maximized or c.fullscreen then return end
-    naughty.notify { text = c.floating and "floating" or "not floating" }
 end
 
 M["unfocus"] = function(c) c.border_color = beautiful.border_normal end
