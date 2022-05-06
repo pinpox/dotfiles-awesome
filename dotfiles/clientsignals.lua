@@ -3,6 +3,7 @@ local M = {}
 
 local gears = require("gears")
 local awful = require("awful")
+local naughty = require("naughty")
 
 -- Widget and layout library
 local wibox = require("wibox")
