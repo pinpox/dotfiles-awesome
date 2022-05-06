@@ -115,7 +115,7 @@ end
 -- 		c.border_color = beautiful.border_focus
 -- end
 
-M["property::floating"], function(c)
+M["property::floating"] = function(c)
     -- if c.maximized or c.fullscreen then return end
     naughty.notify { text = c.floating and "floating" or "not floating" }
 end
