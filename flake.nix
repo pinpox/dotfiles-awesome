@@ -22,7 +22,7 @@
     let test = "rstin";
     in {
       nixosModules = {
-        dotfiles = { ... }: {
+        dotfiles = {
           home.file = {
             ".config/awesome".source = ./dotfiles;
             ".local/share/wallpaper-generator".source = wallpaper-generator;
@@ -31,7 +31,7 @@
       };
     } //
 
-    flake-utils.lib.eachDefaultSystem (system:
+    flake-utils.lib.eachSystem [  "aarch64-linux" "i686-linux" "x86_64-linux" ] (system:
       let pkgs = nixpkgs.legacyPackages.${system};
 
       in rec {
