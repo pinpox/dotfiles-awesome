@@ -17,7 +17,7 @@
     };
 
   };
-  outputs = { self, ... }@inputs:
+  outputs = { ... }@inputs:
     with inputs;
     let test = "rstin";
     in {
