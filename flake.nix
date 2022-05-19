@@ -22,7 +22,7 @@
     let test = "rstin";
     in {
       nixosModules = {
-        dotfiles = { config, ... }: {
+        dotfiles = { ... }: {
           home.file = {
             ".config/awesome".source = ./dotfiles;
             ".local/share/wallpaper-generator".source = wallpaper-generator;
