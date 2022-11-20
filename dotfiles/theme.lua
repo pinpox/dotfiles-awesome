@@ -140,6 +140,28 @@ theme.awesome_icon = theme_assets.awesome_icon( theme.menu_height, palette.base0
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel( dpi(5), palette.base05)
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel( dpi(5), palette.base05)
 
+-- Notifications
+local naughty = require("naughty")
+local nconf = naughty.config
+
+nconf.defaults.border_width = dpi(2)
+nconf.defaults.margin = 16
+
+nconf.defaults.shape = function(cr,w,h) gears.shape.rounded_rect(cr,w,h,6) end
+nconf.defaults.text = "Boo!"
+nconf.defaults.position = "top_middle"
+nconf.defaults.timeout = 10
+
+-- Space between popup and edge of screen/workarea
+nconf.padding = dpi(80)
+
+nconf.presets.critical.bg = palette.base09
+nconf.presets.critical.fg = palette.base05
+nconf.presets.low.bg = palette.base00
+nconf.presets.normal.bg = palette.base00
+nconf.defaults.icon_size = 64
+nconf.spacing = 8
+
 -- Generate wallpaper:
 local cairo = require("lgi").cairo
 
