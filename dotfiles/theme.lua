@@ -22,47 +22,82 @@ theme.font =  theme.font_family .. " " .. theme.font_size
 
 local palette = {}
 
-palette.base00 = xrdb.color0
-palette.base01 = xrdb.color1
-palette.base02 = xrdb.color2
-palette.base03 = xrdb.color3
-palette.base04 = xrdb.color4
-palette.base05 = xrdb.color5
-palette.base06 = xrdb.color6
-palette.base07 = xrdb.color7
-palette.base08 = xrdb.color8
-palette.base09 = xrdb.color9
-palette.base0A = xrdb.color10
-palette.base0B = xrdb.color11
-palette.base0C = xrdb.color12
-palette.base0D = xrdb.color13
-palette.base0E = xrdb.color14
-palette.base0F = xrdb.color15
 
-theme.bg_normal     = palette.base00
-theme.bg_focus      = palette.base0D
-theme.bg_urgent     = palette.base09
-theme.bg_minimize   = palette.base09
-theme.bg_systray    = palette.base00
+    xresources.properties = {
 
-theme.fg_normal     = palette.base05
-theme.fg_focus      = palette.base00
-theme.fg_urgent     = palette.base00
-theme.fg_minimize   = palette.base00
+
+
+      -- # Yellow
+      -- "color3" = "#${colorscheme.Yellow}";
+      -- "color11" = "#${colorscheme.BrightYellow}";
+
+      -- # Blue
+      -- "color4" = "#${colorscheme.Blue}";
+      -- "color12" = "#${colorscheme.BrightBlue}";
+
+      -- # Magenta
+      -- "color5" = "#${colorscheme.Magenta}";
+      -- "color13" = "#${colorscheme.BrightMagenta}";
+
+      -- # Cyan
+      -- "color6" = "#${colorscheme.Cyan}";
+      -- "color14" = "#${colorscheme.BrightCyan}";
+
+      -- # White
+      -- "color7" = "#${colorscheme.White}";
+      -- "color15" = "#${colorscheme.BrightWhite}";
+
+
+    -- # ANSI Colors
+palette.Black        = xrdb.color0
+palette.BrightBlack  = xrdb.color8
+
+palette.Red          = xrdb.color1
+palette.BrightRed    = xrdb.color9
+
+palette.Green        = xrdb.color2
+palette.BrightGreen  = xrdb.color10
+
+palette.Yellow       = xrdb.color3
+palette.BrightYellow = xrdb.color11
+
+palette.Blue         = xrdb.color4
+palette.BrightBlue   = xrdb.color12
+
+palette.Magenta      = xrdb.color5
+palette.BrightMagenta = xrdb.color13
+
+palette.Cyan         = xrdb.color6
+palette.BrightCyan   = xrdb.color14
+
+palette.White        = xrdb.color7
+palette.BrightWhite  = xrdb.color15
+
+
+theme.bg_normal     = palette.Black
+theme.bg_focus      = palette.Blue
+theme.bg_urgent     = palette.Red
+theme.bg_minimize   = palette.Black
+theme.bg_systray    = palette.Black
+
+theme.fg_normal     = palette.Black
+theme.fg_focus      = palette.Black
+theme.fg_urgent     = palette.Red
+theme.fg_minimize   = palette.Green
 
 theme.useless_gap   = dpi(3)
 theme.border_width  = dpi(2)
-theme.border_normal = palette.base03
-theme.border_focus  = palette.base0D
-theme.border_marked = palette.base0A
+theme.border_normal = palette.BrightBlack
+theme.border_focus  = palette.Blue
+theme.border_marked = palette.Green
 
 -- Taglist (workspace indicator)
-theme.taglist_fg_focus = palette.base00
-theme.taglist_bg_focus = palette.base0D
-theme.taglist_fg_urgent = palette.base00
-theme.taglist_bg_urgent = palette.base08
-theme.taglist_fg_occupied = palette.base05
-theme.taglist_bg_occupied = palette.base03
+theme.taglist_fg_focus = palette.Black
+theme.taglist_bg_focus = palette.Blue
+theme.taglist_fg_urgent = palette.Black
+theme.taglist_bg_urgent = palette.Red
+theme.taglist_fg_occupied = palette.White
+theme.taglist_bg_occupied = palette.BrightBlack
 -- theme.taglist_fg_empty
 -- theme.taglist_bg_empty
 -- theme.taglist_fg_volatile
@@ -74,16 +109,16 @@ theme.taglist_spacing = 5
 
 
 -- Tasklist (windows on workspace)
-theme.tasklist_fg_focus = palette.base00
-theme.tasklist_bg_focus = palette.base0D
-theme.tasklist_fg_urgent = palette.base00
-theme.tasklist_bg_urgent = palette.base08
+theme.tasklist_fg_focus = palette.Black
+theme.tasklist_bg_focus = palette.Blue
+theme.tasklist_fg_urgent = palette.Black
+theme.tasklist_bg_urgent = palette.Red
 
 -- Titlebar (window decorations)
-theme.titlebar_fg_normal = palette.base05
-theme.titlebar_bg_normal = palette.base00
-theme.titlebar_fg_focus = palette.base00
-theme.titlebar_bg_focus = palette.base0D
+theme.titlebar_fg_normal = palette.White
+theme.titlebar_bg_normal = palette.BrightBlack
+theme.titlebar_fg_focus = palette.Black
+theme.titlebar_bg_focus = palette.Blue
 --
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
@@ -122,23 +157,23 @@ local function darker(color_value, darker_n)
     return result
 end
 
-theme = theme_assets.recolor_titlebar( theme, palette.base05, "normal")
-theme = theme_assets.recolor_titlebar( theme, palette.base03, "normal", "hover")
-theme = theme_assets.recolor_titlebar( theme, palette.base01, "normal", "press")
-theme = theme_assets.recolor_titlebar( theme, palette.base00, "focus")
+theme = theme_assets.recolor_titlebar( theme, palette.BrighRed, "normal")
+theme = theme_assets.recolor_titlebar( theme, palette.BrightRed, "normal", "hover")
+theme = theme_assets.recolor_titlebar( theme, palette.BrightBlack, "normal", "press")
+theme = theme_assets.recolor_titlebar( theme, palette.Black, "focus")
 theme = theme_assets.recolor_titlebar( theme, darker(theme.fg_focus, -60), "focus", "hover")
-theme = theme_assets.recolor_titlebar( theme, palette.base01, "focus", "press")
+theme = theme_assets.recolor_titlebar( theme, palette.Red, "focus", "press")
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 theme.icon_theme = nil
 
 -- Generate Awesome icon:
-theme.awesome_icon = theme_assets.awesome_icon( theme.menu_height, palette.base0E, palette.base00)
+theme.awesome_icon = theme_assets.awesome_icon( theme.menu_height, palette.Red, palette.Green)
 
 -- Generate taglist squares:
-theme.taglist_squares_sel = theme_assets.taglist_squares_sel( dpi(5), palette.base05)
-theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel( dpi(5), palette.base05)
+theme.taglist_squares_sel = theme_assets.taglist_squares_sel( dpi(5), palette.Red)
+theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel( dpi(5), palette.Green)
 
 -- Notifications
 local naughty = require("naughty")
@@ -155,10 +190,10 @@ nconf.defaults.timeout = 10
 -- Space between popup and edge of screen/workarea
 nconf.padding = dpi(80)
 
-nconf.presets.critical.bg = palette.base09
-nconf.presets.critical.fg = palette.base05
-nconf.presets.low.bg = palette.base00
-nconf.presets.normal.bg = palette.base00
+nconf.presets.critical.bg = palette.Red
+nconf.presets.critical.fg = palette.Black
+nconf.presets.low.bg = palette.BrightBlack
+nconf.presets.normal.bg = palette.Black
 nconf.defaults.icon_size = 64
 nconf.spacing = 8
 
