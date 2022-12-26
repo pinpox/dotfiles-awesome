@@ -22,33 +22,6 @@ theme.font =  theme.font_family .. " " .. theme.font_size
 
 local palette = {}
 
-
-    xresources.properties = {
-
-
-
-      -- # Yellow
-      -- "color3" = "#${colorscheme.Yellow}";
-      -- "color11" = "#${colorscheme.BrightYellow}";
-
-      -- # Blue
-      -- "color4" = "#${colorscheme.Blue}";
-      -- "color12" = "#${colorscheme.BrightBlue}";
-
-      -- # Magenta
-      -- "color5" = "#${colorscheme.Magenta}";
-      -- "color13" = "#${colorscheme.BrightMagenta}";
-
-      -- # Cyan
-      -- "color6" = "#${colorscheme.Cyan}";
-      -- "color14" = "#${colorscheme.BrightCyan}";
-
-      -- # White
-      -- "color7" = "#${colorscheme.White}";
-      -- "color15" = "#${colorscheme.BrightWhite}";
-
-
-    -- # ANSI Colors
 palette.Black        = xrdb.color0
 palette.BrightBlack  = xrdb.color8
 
@@ -212,7 +185,28 @@ theme.wallpaper = function(s)
     package.path = package.path .. ";/home/pinpox/.local/share/wallpaper-generator/?.lua"
     colors = require "colors"
     generator = require("generators.harmonograph")
-    generator(cr, palette, width, height)
+
+    local palette_wpgen =  {}
+    palette_wpgen.base00 = palette.Black
+    palette_wpgen.base01 = palette.BrightBlack
+
+    palette_wpgen.base02 = palette.BrightBlack
+    palette_wpgen.base03 = palette.BrightBlack
+    palette_wpgen.base04 = palette.BrightBlack
+    palette_wpgen.base05 = palette.White
+
+    palette_wpgen.base06 = palette.White
+    palette_wpgen.base07 = palette.BrightWhite
+    palette_wpgen.base08 = palette.Red
+    palette_wpgen.base09 = palette.BrightRed
+    palette_wpgen.base0A = palette.Yellow
+    palette_wpgen.base0B = palette.Green
+    palette_wpgen.base0C = palette.Cyan
+    palette_wpgen.base0D = palette.Blue
+    palette_wpgen.base0E = palette.Magenta
+    palette_wpgen.base0F = palette.BrightYellow
+
+    generator(cr, palette_wpgen, width, height)
     return img
 end
 
@@ -255,11 +249,11 @@ end
 -- Cache the buttons in variables, so we don't have to generate them multiple
 -- times as drawing them is expensive
 local button_images = {}
-button_images.red, button_images.red_dark, button_images.red_light = button_variants(xrdb.color8)
-button_images.yellow, button_images.yellow_dark, button_images.yellow_light = button_variants(xrdb.color10)
-button_images.green, button_images.green_dark, button_images.green_light = button_variants(xrdb.color11)
-button_images.blue, button_images.blue_dark, button_images.blue_light = button_variants(xrdb.color13)
-button_images.grey, button_images.grey_dark, button_images.grey_light = button_variants(xrdb.color3)
+button_images.red, button_images.red_dark, button_images.red_light = button_variants(xrdb.color1)
+button_images.yellow, button_images.yellow_dark, button_images.yellow_light = button_variants(xrdb.color3)
+button_images.green, button_images.green_dark, button_images.green_light = button_variants(xrdb.color2)
+button_images.blue, button_images.blue_dark, button_images.blue_light = button_variants(xrdb.color4)
+button_images.grey, button_images.grey_dark, button_images.grey_light = button_variants(xrdb.color8)
 
 -- Association between colors and button types
 local button_types = {
