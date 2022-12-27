@@ -53,7 +53,7 @@ theme.bg_urgent     = palette.Red
 theme.bg_minimize   = palette.Black
 theme.bg_systray    = palette.Black
 
-theme.fg_normal     = palette.Black
+theme.fg_normal     = palette.White
 theme.fg_focus      = palette.Black
 theme.fg_urgent     = palette.Red
 theme.fg_minimize   = palette.Green
@@ -186,25 +186,25 @@ theme.wallpaper = function(s)
     colors = require "colors"
     generator = require("generators.harmonograph")
 
-    local palette_wpgen =  {}
-    palette_wpgen.base00 = palette.Black
-    palette_wpgen.base01 = palette.BrightBlack
+   local palette_wpgen =  {}
+palette_wpgen.base00 = palette.Black
+palette_wpgen.base01 = palette.BrightBlack
 
-    palette_wpgen.base02 = palette.BrightBlack
-    palette_wpgen.base03 = palette.BrightBlack
-    palette_wpgen.base04 = palette.BrightBlack
-    palette_wpgen.base05 = palette.White
+palette_wpgen.base02 = palette.BrightBlack
+palette_wpgen.base03 = palette.BrightBlack
+palette_wpgen.base04 = palette.BrightBlack
+palette_wpgen.base05 = palette.White
 
-    palette_wpgen.base06 = palette.White
-    palette_wpgen.base07 = palette.BrightWhite
-    palette_wpgen.base08 = palette.Red
-    palette_wpgen.base09 = palette.BrightRed
-    palette_wpgen.base0A = palette.Yellow
-    palette_wpgen.base0B = palette.Green
-    palette_wpgen.base0C = palette.Cyan
-    palette_wpgen.base0D = palette.Blue
-    palette_wpgen.base0E = palette.Magenta
-    palette_wpgen.base0F = palette.BrightYellow
+palette_wpgen.base06 = palette.White
+palette_wpgen.base07 = palette.BrightWhite
+palette_wpgen.base08 = palette.Red
+palette_wpgen.base09 = palette.BrightRed
+palette_wpgen.base0A = palette.Yellow
+palette_wpgen.base0B = palette.Green
+palette_wpgen.base0C = palette.Cyan
+palette_wpgen.base0D = palette.Blue
+palette_wpgen.base0E = palette.Magenta
+palette_wpgen.base0F = palette.BrightYellow
 
     generator(cr, palette_wpgen, width, height)
     return img
