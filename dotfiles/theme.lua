@@ -16,7 +16,7 @@ local themes_path = gfs.get_themes_dir()
 local theme = dofile(themes_path.."default/theme.lua")
 -- load vector assets' generators for this theme
 
-theme.font_family = "Recursive Sans Linear Static Medium"
+theme.font_family = "Berkeley Mono"
 theme.font_size = "9"
 theme.font =  theme.font_family .. " " .. theme.font_size
 
